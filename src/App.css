@@ -1,38 +1,91 @@
-.App {
+.container {
+  height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+}
+.up-div {
+  padding: 50px;
   text-align: center;
+  background: white;
+  height: 41vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.up-div > h1 {
+  font-size: 4rem;
+  color: #ff9800;
+  text-shadow: 1px 1px 2px #6b5a1d;
+}
+.up-div h3 {
+  font-size: 1.8rem;
+  color: antiquewhite;
+  text-shadow: 1px 2px 2px #ca6e59;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.down-div {
+  background: #ffc107;
+  height: 50vh;
+}
+.name-area{
+  padding:20px;
+  height: 116px;
+  width: 35%;
+  position: fixed;
+  top: 43vh;
+  left: 34%;
+  border-radius: 12px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.name-box{ 
+  margin-top:5px;
+  padding:20px; 
+  width:80%; 
+  font-size: 26px;
+  border:0px; 
+  background:#ffc107; 
+  color:white;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.name-box:focus{ 
+  outline:0;
+}
+
+.circle {
+  height: 300px;
+  width: 300px;
+  border-radius: 100%;
+  position: fixed;
+  top: 35vh;
+  left: 40%;
+  cursor: pointer;
+}
+.circle:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-out;
+}
+
+.circle:active {
+  transform: scale(6);
+  transition: 0.2s ease-out;
+  background: white;
+}
+.circle::after {
+  content: "";
   color: white;
+  position: absolute;
+  top: 11vh;
+  left: 39%;
+  font-size: 40px;
+  color: #deabab;
+  border: solid 50px transparent;
+  border-left-width: 10px;
+  border-left-width: 20px;
+  border-left-color: #68af17;
+  border-left-width: 87px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.lift {
+  box-shadow: 0 2px 0px 0 rgb(0 0 0 / 0%), 0 3px 46px 0 rgb(0 0 0 / 26%);
+  -webkit-box-shadow: 0 2px 0px 0 rgb(0 0 0 / 0%), 0 3px 46px 0 rgb(0 0 0 / 26%);
 }
