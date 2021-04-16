@@ -21,6 +21,7 @@ export default class LandingPage extends Component {
         <div className="name-area lift">
           <h3>TYPE YOUR FULL NAME IN THE BOX BELOW</h3>
           <input className="name-box" placeholder="Enter name..." />
+          <button className="go-btn">Go</button>
         </div>
         <div className="down-div"></div>
       </div>
