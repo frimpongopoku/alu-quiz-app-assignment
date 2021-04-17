@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import Play from "./pages/Play";

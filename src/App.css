@@ -1,4 +1,112 @@
-.container {
+
+.email-box{ 
+  border:solid 0px #efefef; 
+  display:block; 
+  border-bottom-width: 2px;
+  font-size:15px; 
+  color:black;
+  margin-bottom:5px;
+  width:100%;
+}
+.textarea{
+  width:100%; 
+  resize:none; 
+  display:block; 
+  color:black; 
+  font-size:15px;
+  margin-top:5px; 
+  margin-bottom:10px;
+  border:solid 0px #efefef;
+  border-bottom-width: 2px;
+}
+
+.send-btn{
+  background:orange; 
+  color:white; 
+  width:90%; 
+  padding:12px; 
+  position:absolute; 
+  bottom:0px;
+  border:0;
+  left:15px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-weight: bold;
+}
+
+.send-btn:hover{
+  background:black; 
+  transition:.2s ease-out;
+}
+
+.remove-outline:focus{ 
+  outline:0;
+}
+
+.contact-us-box{ 
+  height:500px; 
+  border-radius:10px;
+}
+
+.one-question {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin:5px 0px;
+}
+.one-question > p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+}
+.q-default {
+  color: grey;
+  border: solid 2px grey;
+}
+.q-completed > p {
+  color: grey;
+}
+.q-completed {
+  color: black;
+  border: solid 2px black;
+}
+.q-completed > p {
+  color: black;
+}
+
+.q-active {
+  color: orange;
+  border: solid 2px orange;
+}
+.q-active > p {
+  color: orange;
+}
+
+.user-profile-photo {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: solid 2px orange;
+  /* padding:5px; */
+  object-fit: cover;
+}
+
+.custom-card > p {
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+  margin-top: 6px;
+}
+
+.custom-card {
+  text-align: center;
+  padding: 15px 15px 5px 15px;
+  background: white;
+  border-radius: 8px;
+}
+.c-container {
   height: 100vh;
   width: 100%;
   overflow-y: hidden;
@@ -25,8 +133,8 @@
   background: #ffc107;
   height: 50vh;
 }
-.name-area{
-  padding:20px;
+.name-area {
+  padding: 20px;
   height: 116px;
   width: 35%;
   position: fixed;
@@ -34,7 +142,7 @@
   left: 34%;
   border-radius: 12px;
 }
-.go-btn{ 
+.go-btn {
   padding: 12px 10px;
   background: #215221;
   color: white;
@@ -46,33 +154,32 @@
   text-shadow: -1px 1px 15px black;
 }
 
-.go-btn:hover{ 
-  background:#d69215;
-  transition: .2s ease-out;
+.go-btn:hover {
+  background: #d69215;
+  transition: 0.2s ease-out;
 }
-.go-btn:focus{ 
-  outline:0;
+.go-btn:focus {
+  outline: 0;
 }
 
-
-.name-box{ 
-  margin-top:5px;
-  padding:20px; 
-  width:80%; 
+.name-box {
+  margin-top: 5px;
+  padding: 20px;
+  width: 80%;
   font-size: 26px;
-  border:0px; 
-  background:#ffc107; 
-  color:white;
+  border: 0px;
+  background: #ffc107;
+  color: white;
   font-weight: bold;
   text-transform: capitalize;
-  display:inline-block;
+  display: inline-block;
 }
 
-.name-box:focus{ 
-  outline:0;
+.name-box:focus {
+  outline: 0;
 }
-.name-box::placeholder{ 
-  color:white;
+.name-box::placeholder {
+  color: white;
 }
 
 .circle {
@@ -112,4 +219,10 @@
 .lift {
   box-shadow: 0 2px 0px 0 rgb(0 0 0 / 0%), 0 3px 46px 0 rgb(0 0 0 / 26%);
   -webkit-box-shadow: 0 2px 0px 0 rgb(0 0 0 / 0%), 0 3px 46px 0 rgb(0 0 0 / 26%);
+}
+
+.lift-slightly {
+  box-shadow: 0 1px 0px 0 rgba(0, 0, 0, -1.84), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 0px 0 rgba(0, 0, 0, -1.84),
+    0 2px 10px 0 rgba(0, 0, 0, 0.1);
 }

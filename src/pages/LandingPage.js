@@ -9,7 +9,7 @@ export default class LandingPage extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="c-container">
         <div className="up-div">
           <h1>WELCOME TO PURPLE GAMES</h1>
           <h3>
