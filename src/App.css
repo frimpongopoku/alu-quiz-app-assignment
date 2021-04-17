@@ -170,7 +170,7 @@
   padding: 50px;
   text-align: center;
   background: white;
-  height: 41vh;
+  height: 50vh;
 }
 
 .up-div > h1 {
@@ -190,20 +190,24 @@
 }
 .name-area {
   padding: 20px;
-  height: 116px;
+  height: 146px;
   width: 35%;
   position: fixed;
   top: 43vh;
   left: 34%;
   border-radius: 12px;
 }
+.name-area h3 {
+  font-size: 21px;
+  font-weight: bold;
+}
 .go-btn {
-  padding: 12px 10px;
+  padding: 10px 15px;
   background: #215221;
   color: white;
   cursor: pointer;
   border: 0;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 80px;
   font-weight: bold;
   text-shadow: -1px 1px 15px black;
@@ -218,9 +222,9 @@
 }
 
 .name-box {
-  margin-top: 5px;
-  padding: 20px;
-  width: 80%;
+  margin-top: 30px;
+  /* padding: 20px; */
+  width: 88%;
   font-size: 26px;
   border: 0px;
   background: #ffc107;
@@ -260,7 +264,7 @@
   content: "";
   color: white;
   position: absolute;
-  top: 11vh;
+  top: 10vh;
   left: 39%;
   font-size: 40px;
   color: #deabab;

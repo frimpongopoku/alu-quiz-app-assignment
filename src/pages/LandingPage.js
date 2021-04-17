@@ -1,3 +1,5 @@
+import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import "./../App.css";
 
@@ -21,7 +23,9 @@ export default class LandingPage extends Component {
         <div className="name-area lift">
           <h3>TYPE YOUR FULL NAME IN THE BOX BELOW</h3>
           <input className="name-box" placeholder="Enter name..." />
-          <button className="go-btn">Go</button>
+          <button className="go-btn">
+            <FontAwesomeIcon icon={faLongArrowAltRight} />
+          </button>
         </div>
         <div className="down-div"></div>
       </div>
