@@ -1,4 +1,38 @@
 
+
+.timer-progress-bar{ 
+  width: 97%;
+  background: orange;
+  height: 20px;
+  display: inline-block;
+  border-radius: 55px;
+  margin-left: 5px;
+}
+.question{
+  min-height: 200px;
+}
+.answer-selected{ 
+  border-color:green !important; 
+  color:green !important;
+}
+
+.answer-wrong{ 
+  border-color:maroon  !important; 
+  color:maroon !important;
+}
+
+.one-answer{ 
+  font-size:22px;
+  padding:10px 20px;
+  cursor:pointer;
+  border-radius:6px;
+  border:solid 2px white;
+  margin-top:5px; 
+  margin-bottom:5px;
+}
+.one-answer:hover{
+  border-color:orange;
+}
 .email-box{ 
   border:solid 0px #efefef; 
   display:block; 

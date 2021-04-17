@@ -1,6 +1,19 @@
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
+import { NumToAlpha } from "../db/keys";
 
 export default class Play extends Component {
+  renderPossibleAnswers() {
+    return [2, 3, 5, 6].map((item, index) => {
+      return (
+        <p className="one-answer" key={index.toString()}>
+          <b>{NumToAlpha(index)}.</b> The {index + 1} option is this first one,
+          what do you think
+        </p>
+      );
+    });
+  }
   renderQuestions() {
     return [0, 1, 2, 3, 3, 5].map((item, index) => {
       return (
@@ -12,8 +25,14 @@ export default class Play extends Component {
   }
   render() {
     return (
-      <div className="" style={{ margin: "0px 10%" }}>
-        <div className="row" style={{ marginTop: "10%" }}>
+      <div className="" style={{ margin: "0px 10%", paddingTop: "10%" }}>
+        <FontAwesomeIcon
+          icon={faClock}
+          style={{ fontSize: "1.5rem", color: "#e49400" }}
+        />
+        <div className="timer-progress-bar"></div>
+        <br />
+        <div className="row">
           <div
             className="col-md-2 col-lg-2 col-sm-6 col-xs-12"
             style={{ padding: 10 }}
@@ -36,6 +55,8 @@ export default class Play extends Component {
               This is a very deep question that is being asked...? Do you
               understand what I am saying? It is quite deep, please answer?
             </h1>
+
+            {this.renderPossibleAnswers()}
           </div>
           <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12">
             <div className="custom-card contact-us-box lift-slightly">
