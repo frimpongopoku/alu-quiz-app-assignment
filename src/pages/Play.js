@@ -1,4 +1,8 @@
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faLongArrowAltLeft,
+  faLongArrowAltRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { NumToAlpha } from "../db/keys";
@@ -25,14 +29,21 @@ export default class Play extends Component {
   }
   render() {
     return (
-      <div className="" style={{ margin: "0px 10%", paddingTop: "10%" }}>
+      <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
+        {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
+        <center>
+          <h1>CSS FOUNDATIONS AND OTHER CATEGORIES</h1>
+          <br />
+        </center>
         <FontAwesomeIcon
           icon={faClock}
           style={{ fontSize: "1.5rem", color: "#e49400" }}
         />
         <div className="timer-progress-bar"></div>
         <br />
-        <div className="row">
+
+        {/* -------------------------------  QUESTION SIDEBAR WITH PROFILE ---------------------------------------- */}
+        <div className="row" style={{ marginTop: 15 }}>
           <div
             className="col-md-2 col-lg-2 col-sm-6 col-xs-12"
             style={{ padding: 10 }}
@@ -50,6 +61,8 @@ export default class Play extends Component {
               <center>{this.renderQuestions()}</center>
             </div>
           </div>
+
+          {/* -----------------------------------------  MAIN QUESTION AREA ------------------------------------------ */}
           <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12">
             <h1 className="question">
               This is a very deep question that is being asked...? Do you
@@ -57,7 +70,19 @@ export default class Play extends Component {
             </h1>
 
             {this.renderPossibleAnswers()}
+            <div className="bottom-directions" style={{ marginTop: 20 }}>
+              <center>
+                <button className="round-btns lift-slightly">
+                  <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                </button>
+                <button className="round-btns lift-slightly">
+                  <FontAwesomeIcon icon={faLongArrowAltRight} />
+                </button>
+              </center>
+            </div>
           </div>
+
+          {/* --------------------------------------  CONTACT US SIDEBAR -------------------------------------------- */}
           <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12">
             <div className="custom-card contact-us-box lift-slightly">
               <h3>Report A Question</h3>
