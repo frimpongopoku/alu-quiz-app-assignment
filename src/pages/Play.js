@@ -1,4 +1,5 @@
 import {
+  faCheckCircle,
   faClock,
   faLongArrowAltLeft,
   faLongArrowAltRight,
@@ -8,6 +9,12 @@ import React, { Component } from "react";
 import { NumToAlpha } from "../db/keys";
 
 export default class Play extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitQuestion: false,
+    };
+  }
   renderPossibleAnswers() {
     return [2, 3, 5, 6].map((item, index) => {
       return (
@@ -28,6 +35,7 @@ export default class Play extends Component {
     });
   }
   render() {
+    const { questionSubmitted } = this.state;
     return (
       <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
         {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
@@ -35,11 +43,12 @@ export default class Play extends Component {
           <h1>CSS FOUNDATIONS AND OTHER CATEGORIES</h1>
           <br />
         </center>
-        <FontAwesomeIcon
+        <div className="top-line"></div>
+        {/* <FontAwesomeIcon
           icon={faClock}
           style={{ fontSize: "1.5rem", color: "#e49400" }}
         />
-        <div className="timer-progress-bar"></div>
+        <div className="timer-progress-bar"></div> */}
         <br />
 
         {/* -------------------------------  QUESTION SIDEBAR WITH PROFILE ---------------------------------------- */}
@@ -86,23 +95,49 @@ export default class Play extends Component {
           <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12">
             <div className="custom-card contact-us-box lift-slightly">
               <h3>Report A Question</h3>
-              <small style={{ margin: "8px 0px" }}>
-                <b>QUESTION 1</b>
-              </small>
-              <input
-                type="email"
-                className="email-box remove-outline"
-                placeholder="Enter email..."
-              />
-              <br />
-              <p style={{ width: "100%", textAlign: "left", color: "grey" }}>
-                What is wrong?
-              </p>
-              <textarea
-                className="textarea remove-outline"
-                rows="10"
-              ></textarea>
-              <button className="send-btn">SEND</button>
+              {!questionSubmitted && (
+                <div>
+                  <small style={{ margin: "8px 0px" }}>
+                    <b>QUESTION 1</b>
+                  </small>
+                  <input
+                    type="email"
+                    className="email-box remove-outline"
+                    placeholder="Enter email..."
+                  />
+                  <br />
+                  <p
+                    style={{ width: "100%", textAlign: "left", color: "grey" }}
+                  >
+                    What is wrong?
+                  </p>
+                  <textarea
+                    className="textarea remove-outline"
+                    rows="10"
+                  ></textarea>
+                </div>
+              )}
+              {questionSubmitted && (
+                <center>
+                  <p
+                    style={{ fontSize: 14, color: "green", fontWeight: "bold" }}
+                  >
+                    Your report has been sent to us, you will hear from us in 3
+                    business days
+                  </p>
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    style={{ fontSize: 50 }}
+                    color="green"
+                  />
+                </center>
+              )}
+              <button
+                className="send-btn"
+                onClick={() => this.setState({ questionSubmitted: true })}
+              >
+                SEND
+              </button>
             </div>
           </div>
         </div>
