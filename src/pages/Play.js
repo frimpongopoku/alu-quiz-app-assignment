@@ -1,6 +1,5 @@
 import {
   faCheckCircle,
-  faClock,
   faLongArrowAltLeft,
   faLongArrowAltRight,
 } from "@fortawesome/free-solid-svg-icons";
@@ -40,7 +39,7 @@ export default class Play extends Component {
       <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
         {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
         <center>
-          <h1>CSS FOUNDATIONS AND OTHER CATEGORIES</h1>
+          <h1>CSS FOUNDATIONS AND OTHER BLUH BLUH</h1>
           <br />
         </center>
         <div className="top-line"></div>
