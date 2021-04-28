@@ -43,13 +43,7 @@ export default class Play extends Component {
           <br />
         </center>
         <div className="top-line"></div>
-        {/* <FontAwesomeIcon
-          icon={faClock}
-          style={{ fontSize: "1.5rem", color: "#e49400" }}
-        />
-        <div className="timer-progress-bar"></div> */}
         <br />
-
         {/* -------------------------------  QUESTION SIDEBAR WITH PROFILE ---------------------------------------- */}
         <div className="row" style={{ marginTop: 15 }}>
           <div
