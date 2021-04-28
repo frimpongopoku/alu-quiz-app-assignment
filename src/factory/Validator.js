@@ -24,11 +24,15 @@ class Validator {
         };
 
       case ANSWER_TYPES.TEXT_ENTRY:
-        const status = this.validateSingleType();
-        return { ...result, status, points: status ? this.points : 0 };
+        const status = this.validateEntryAnswerQuestion(); 
+        return { 
+          ...result, 
+          points: status ? this.question.points : 0
+        }
 
       case ANSWER_TYPES.SINGLE:
-        break;
+        const status = this.validateSingleType();
+        return { ...result, status, points: status ? this.points : 0 };
 
       case ANSWER_TYPES.DRAG_AND_DROP:
         break;

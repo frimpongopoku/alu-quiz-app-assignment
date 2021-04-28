@@ -13,6 +13,7 @@ export default class Play extends Component {
     this.state = {
       submitQuestion: false,
     };
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
   renderPossibleAnswers() {
     return [2, 3, 5, 6].map((item, index) => {
@@ -33,8 +34,17 @@ export default class Play extends Component {
       );
     });
   }
+
+  submitReport() {
+    const { messageBody, email } = this.state;
+    if (!messageBody || !email) console.log("There is nothing sensible in the bixes");
+  }
+
+  handleOnChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
   render() {
-    const { questionSubmitted } = this.state;
+    const { questionSubmitted} = this.state;
     return (
       <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
         {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
@@ -97,6 +107,8 @@ export default class Play extends Component {
                     type="email"
                     className="email-box remove-outline"
                     placeholder="Enter email..."
+                    onChange={this.handleOnChange}
+                    name="email"
                   />
                   <br />
                   <p
@@ -105,6 +117,8 @@ export default class Play extends Component {
                     What is wrong?
                   </p>
                   <textarea
+                    name="messageBody"
+                    onChange={this.handleOnChange}
                     className="textarea remove-outline"
                     rows="10"
                   ></textarea>
@@ -125,10 +139,7 @@ export default class Play extends Component {
                   />
                 </center>
               )}
-              <button
-                className="send-btn"
-                onClick={() => this.setState({ questionSubmitted: true })}
-              >
+              <button className="send-btn" onClick={() => this.submitReport()}>
                 SEND
               </button>
             </div>
