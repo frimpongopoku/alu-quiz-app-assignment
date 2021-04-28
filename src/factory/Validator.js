@@ -39,6 +39,15 @@ class Validator {
   }
 
   /**
+   * @TODO remember to comment later...
+   */
+  validateEntryAnswerQuestion() {
+    if (!this.answer || this.answer.trim() === "") return false;
+    const deflated = this.answer.replace(/\s/g, "");
+    return deflated === this.question.possibleAnswers.correctAnswer;
+  }
+
+  /**
    * The @validateSingleType function is used to validate questions that expect a single
    * answer from player
    * Things To Note:
@@ -48,7 +57,7 @@ class Validator {
    * -------------
    * Every answer object has an @isAnswer (a @boolean ) field which is used to verify if the chosen answer is right
    *
-   * @return @Boolean that represents the state of use's answer
+   * @return @Boolean that represents the state of player's answer
    *
    */
   validateSingleType() {
@@ -88,9 +97,9 @@ class Validator {
    * ---------------------------------------
    *  let a = number of items in the correct answer array, b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
    * Hence total points earned by user : PE = (a/b) * p
-   * With this formular: 
+   * With this formular:
    * A fully answered question is  = maximum points attainable = p
-   * A partially answered question is  = some value  > 0 but < p 
+   * A partially answered question is  = some value  > 0 but < p
    * A wrongly answered question is exactly = 0
    * Now @return an object with fields
    * @status : which is a direct relationship of the number of points earned in Boolean(PE),

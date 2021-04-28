@@ -84,32 +84,7 @@ export const questions = [
     question: "What is the name of your favorite pet?",
     possibleAnswers: {
       settings: { special: true, style: {} },
-      options: [
-        {
-          letter: "A",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: false,
-        },
-        {
-          letter: "B",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: false,
-        },
-        {
-          letter: "C",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: true,
-        },
-        {
-          letter: "D",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: false,
-        },
-      ],
+      correctAnswer: "#nameOfClass{background:white;}"
     },
   },
 ];
