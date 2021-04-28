@@ -90,7 +90,7 @@ export default class Play extends Component {
             <DisplayMaker
               answers={[3, 4, 5, 6]}
               question={{ key: "kerekjsdf" }}
-              type={ANSWER_TYPES.MULTIPLE}
+              type={ANSWER_TYPES.SINGLE}
             />
             <div className="bottom-directions" style={{ marginTop: 20 }}>
               <center>

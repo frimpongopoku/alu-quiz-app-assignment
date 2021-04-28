@@ -1,11 +1,11 @@
-.multi-chosen-answer {
+.chosen-answer-active {
   background: green;
   color: white;
   border: white;
   cursor: pointer;
   border-color: green !important;
 }
-.multi-chosen-answer:hover {
+.chosen-answer-active:hover {
   transform: scale(1.02);
   transition: 0.2s ease-out;
   border-color: green !important;

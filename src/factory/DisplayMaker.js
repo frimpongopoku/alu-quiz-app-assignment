@@ -9,28 +9,56 @@ export default class DisplayMaker extends Component {
       selected: null,
     };
   }
+
+  pushAnswerToState(key, answer) {
+    const { selected } = this.state;
+
+    if (selected && selected.key === key)
+      this.setState({
+        selected: null,
+      });
+    else this.setState({ selected: { ans: answer, key } });
+  }
   createDisplayForSingleQuestion() {
-    // const {} = this.props;
+    const { question, answers } = this.props;
+    const { key } = question;
+    return answers.map((answer, index) => {
+      const letter = NumToAlpha(index);
+      const id = key + "->" + letter;
+      return (
+        <p
+          className={`one-answer ${
+            this.answerIsSelected(id) ? `chosen-answer-active` : ""
+          }`}
+          key={index.toString()}
+          onClick={() => this.pushAnswerToState(id, answer)}
+        >
+          <b>{letter}.</b> The {index + 1} option is this first one, what do you
+          think
+        </p>
+      );
+    });
   }
 
   pushMultipleAnswersToState(key, answer) {
-    // console.log("I know I have been clicked bro, me I do know that", key, answer);
     var { selected } = this.state;
     selected = selected || [];
     const found = selected.filter((ans) => ans.key === key);
     if (found.length > 0) {
-      console.log("I was found");
       const rem = selected.filter((ans) => ans.key !== key);
       this.setState({ selected: rem });
     } else {
-      console.log("was not found");
       selected.push({ ans: answer, key });
       this.setState({ selected });
     }
   }
 
   answerIsSelected(answerKey) {
+    const { type } = this.props;
     const selected = this.state.selected || [];
+    if (type === ANSWER_TYPES.SINGLE) {
+      return answerKey === selected.key;
+    }
     const isIn = selected.filter((ans) => ans.key === answerKey);
     return !!isIn.length;
   }
@@ -43,7 +71,7 @@ export default class DisplayMaker extends Component {
       return (
         <p
           className={`one-answer ${
-            this.answerIsSelected(id) ? `multi-chosen-answer` : ""
+            this.answerIsSelected(id) ? `chosen-answer-active` : ""
           }`}
           key={index.toString()}
           onClick={() => this.pushMultipleAnswersToState(id, answer)}
@@ -60,7 +88,7 @@ export default class DisplayMaker extends Component {
       case ANSWER_TYPES.MULTIPLE:
         return this.createDisplayForMultipleAnswerQuestion();
       case ANSWER_TYPES.SINGLE:
-        return <i></i>;
+        return this.createDisplayForSingleQuestion();
       case ANSWER_TYPES.TEXT_ENTRY:
         return <i></i>;
       default:
@@ -68,7 +96,6 @@ export default class DisplayMaker extends Component {
     }
   }
   render() {
-    console.log(" iam the answers", this.state.selected);
     return <div>{this.renderContent()} </div>;
   }
 }
