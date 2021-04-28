@@ -74,24 +74,27 @@ class Validator {
    * How is it known if an answer is right or not?
    * ----------------------------------------------
    * All answer objects come with a field @isAnswer (a @boolean ) that indicates whether or not the answer is right
-   * Hence while going over each answer the user provided, we just need to verify by the field if @isAnswer
-   * If the answer is right? push the current answer object that the loop cursor is on, into an array called @correct
-   * If the answer is wrong? Push the current answer object that the loop cursor is on, into an array called @wrong
+   * Hence while going over each answer the user provided, we just need to verify by the using field @isAnswer
+   * If the answer is right, push the current answer object that the loop cursor is on, into an array called @correct
+   * If the answer is wrong, push the current answer object into an array called @wrong
    * The @correct and @wrong arrays will later be used in a part of the UI to inform the player of which answers they got right or wrong
    * How points are determined for a multiple-answer-question?
    * ---------------------------------------------------------
    * Things To Note:
    * Every multiple-answer-question object comes with a @possibleAnswers field that is also an object.
-   * This  object contains another field named @expected that indicates how many correct answers are expected.
+   * This  object contains another field named @expected (numerical value) that indicates how many correct answers are expected.
    * With this, we can easily determine how many points were obtained by doing the following
-   *
    * To obtain the points for all cases:
    * ---------------------------------------
-   *  let a = number of items in the correct answer, b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
-   * Hence total points earned by user = (a/b) * p
+   *  let a = number of items in the correct answer array, b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
+   * Hence total points earned by user : PE = (a/b) * p
+   * With this formular: 
+   * A fully answered question is  = maximum points attainable = p
+   * A partially answered question is  = some value  > 0 but < p 
+   * A wrongly answered question is exactly = 0
    * Now @return an object with fields
-   * @status : which is a direct relationship of the number of points earned in boolean,
-   * @correct : which is the array of all choses correct answers by player ( to be used later)
+   * @status : which is a direct relationship of the number of points earned in Boolean(PE),
+   * @correct : which is the array of all chosen correct answers by player ( to be used later)
    * @wrong : an array of all wrong answers chosen by player ( to be used later )
    * --------------------------------------
    * NB: Getting some and not all the answers right still gives a validation of "true" in the @status field
