@@ -6,19 +6,22 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { NumToAlpha } from "../db/keys";
+import { ANSWER_TYPES } from "../db/questions-db";
+import DisplayMaker from "../factory/DisplayMaker";
 
 export default class Play extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      submitQuestion: false,
+      questionReported: false,
+      reportError: false,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   renderPossibleAnswers() {
     return [2, 3, 5, 6].map((item, index) => {
       return (
-        <p className="one-answer" key={index.toString()}>
+        <p className="one-answer multi-chosen-answer" key={index.toString()}>
           <b>{NumToAlpha(index)}.</b> The {index + 1} option is this first one,
           what do you think
         </p>
@@ -37,14 +40,15 @@ export default class Play extends Component {
 
   submitReport() {
     const { messageBody, email } = this.state;
-    if (!messageBody || !email) console.log("There is nothing sensible in the bixes");
+    if (!messageBody || !email) return this.setState({ reportError: true });
+    this.setState({ reportError: false, questionReported: true });
   }
 
   handleOnChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
-    const { questionSubmitted} = this.state;
+    const { questionReported, reportError } = this.state;
     return (
       <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
         {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
@@ -81,7 +85,13 @@ export default class Play extends Component {
               understand what I am saying? It is quite deep, please answer?
             </h1>
 
-            {this.renderPossibleAnswers()}
+            {/* {this.renderPossibleAnswers()} */}
+
+            <DisplayMaker
+              answers={[3, 4, 5, 6]}
+              question={{ key: "kerekjsdf" }}
+              type={ANSWER_TYPES.MULTIPLE}
+            />
             <div className="bottom-directions" style={{ marginTop: 20 }}>
               <center>
                 <button className="round-btns lift-slightly">
@@ -98,7 +108,7 @@ export default class Play extends Component {
           <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12">
             <div className="custom-card contact-us-box lift-slightly">
               <h3>Report A Question</h3>
-              {!questionSubmitted && (
+              {!questionReported && (
                 <div>
                   <small style={{ margin: "8px 0px" }}>
                     <b>QUESTION 1</b>
@@ -124,7 +134,7 @@ export default class Play extends Component {
                   ></textarea>
                 </div>
               )}
-              {questionSubmitted && (
+              {questionReported && (
                 <center>
                   <p
                     style={{ fontSize: 14, color: "green", fontWeight: "bold" }}
@@ -138,6 +148,12 @@ export default class Play extends Component {
                     color="green"
                   />
                 </center>
+              )}
+
+              {reportError && (
+                <p style={{ color: "maroon" }}>
+                  Please fill out all appropriate fields
+                </p>
               )}
               <button className="send-btn" onClick={() => this.submitReport()}>
                 SEND

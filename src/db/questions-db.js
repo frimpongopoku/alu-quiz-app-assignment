@@ -7,6 +7,7 @@ export const ANSWER_TYPES = {
 
 export const questions = [
   {
+    key:"2f3fd958-b047-4e31-a888-a2481e46e0a8",
     topic: { title : "POSITIONING", resources:"www.w3schools.com"},
     type: ANSWER_TYPES.MULTIPLE,
     points: 10,
@@ -43,6 +44,7 @@ export const questions = [
     },
   },
   {
+    key: "bd63ce82-6704-4a8b-a87f-f8a0d4aaf37e",
     topic:{ title : "TARGETTING", resources:"www.w3schools.com"},
     type: ANSWER_TYPES.SINGLE,
     points: 5,
@@ -78,6 +80,7 @@ export const questions = [
     },
   },
   {
+    key:"57991021-406a-4f34-964e-37c803d7a254",
     topic: { title : "COLORS", resources:"www.w3schools.com"},
     type: ANSWER_TYPES.TEXT_ENTRY,
     points: 10,

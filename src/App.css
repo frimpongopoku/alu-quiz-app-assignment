@@ -1,11 +1,23 @@
-.top-line{ 
+.multi-chosen-answer {
+  background: green;
+  color: white;
+  border: white;
+  cursor: pointer;
+  border-color: green !important;
+}
+.multi-chosen-answer:hover {
+  transform: scale(1.02);
+  transition: 0.2s ease-out;
+  border-color: green !important;
+}
+
+.top-line {
   height: 10px;
   background: orange;
   width: 100%;
   border-style: double;
   border-color: white;
 }
-
 
 .round-btns {
   margin: 10px;
@@ -62,6 +74,8 @@
 }
 .one-answer:hover {
   border-color: orange;
+  transform: scale(1.02);
+  transition: 0.2s ease-out;
 }
 .email-box {
   border: solid 0px #efefef;
