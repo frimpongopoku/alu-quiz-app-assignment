@@ -16,7 +16,7 @@ export default class DisplayMaker extends Component {
     this.setState({ textEntry: e.target.value });
     this.handleOnItemSelected(e.target.value);
   };
-  
+
   createDisplayForTextEntryAnswers() {
     return (
       <textarea
@@ -98,8 +98,9 @@ export default class DisplayMaker extends Component {
       this.handleOnItemSelected(selected);
     } else {
       // answer has not been selected, so go ahead and add
-      this.setState({ multiSelected: [...selected, obj] });
-      this.handleOnItemSelected(obj);
+      let ready = [...selected, obj];
+      this.setState({ multiSelected: ready });
+      this.handleOnItemSelected(ready);
     }
   }
 

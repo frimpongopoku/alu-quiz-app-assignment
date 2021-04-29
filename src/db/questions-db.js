@@ -148,7 +148,7 @@ export const questions = [
     },
     settings: { hasHTML: false },
     type: ANSWER_TYPES.MULTIPLE,
-    points: 5,
+    points: 10,
     title:
       " Which of the following can be a possible value for margin properties? Select all that apply. ",
     possibleAnswers: {

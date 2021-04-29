@@ -114,15 +114,20 @@ export default class Validator {
    * NB: Getting some and not all the answers right still gives a validation of "true" in the @status field
    */
   validateMultipleAnswerQuestion() {
-    const { possibleAnswers, points } = this.question.possibleAnswers;
+    const { possibleAnswers, points } = this.question;
     const answers = this.answer || [];
-    var correct,
-      wrong = [];
+    var correct = [];
+    var wrong = [];
+    // console.log("i am the answers", answers);
+    // console.log("i am the deafults", this.answer)
     answers.forEach((answer) => {
+      console.log("I am in the loop", answer);
       if (answer.ans.isAnswer) correct.push(answer);
       else wrong.push(answer);
     });
-    var pointsEarned = (correct.length / possibleAnswers.expected) * points;
-    return { status: !!pointsEarned, correct, wrong };
+    var pointsEarned =
+      (Number(correct.length) / Number(possibleAnswers.expected)) *
+      Number(points);
+    return { status: !!pointsEarned, correct, wrong, points: pointsEarned };
   }
 }

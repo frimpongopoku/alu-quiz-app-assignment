@@ -124,33 +124,45 @@ export default class Play extends Component {
   onAnswered(data) {
     console.log("i am the data bro", data);
     if (!data) return;
-    const { currentQuestion, points } = this.state;
+    const { currentQuestion } = this.state;
+    var points = this.state.points;
     const validator = new Validator(currentQuestion, data);
     const answerState = validator.answerIsCorrect();
-    var alreadyAnsweredQuestions = this.state.playerSheet || []
-    var currentQuestionHasBeenAnsweredBefore = alreadyAnsweredQuestions.filter( ansObj => ansObj.questionKey === currentQuestion.key)
-    if(currentQuestionHasBeenAnsweredBefore && currentQuestionHasBeenAnsweredBefore.length > 0 ){
-
-      // to be continued
-
-    }
-    if (answerState.status === true) points += points;
-  
 
     const playerAnswerObj = {
+      // create object that is going to contain the player's answer , the question, whether they were right or wrong, and how many points they earned from the validator
       wasRight: answerState.status,
       question: currentQuestion,
       questionKey: currentQuestion.key,
-      answer:data, 
-      pointsEarned:answerState.points,
-      wrong: answerState.wrong, 
-      correct:answerState.correct
+      answer: data,
+      pointsEarned: answerState.points,
+      wrong: answerState.wrong,
+      correct: answerState.correct,
     };
-
-    this.setState({points,})
+    var alreadyAnsweredQuestions = this.state.playerSheet || [];
+    var currentQuestionHasBeenAnsweredBefore = alreadyAnsweredQuestions.filter(
+      (ansObj) => ansObj.questionKey === currentQuestion.key
+    );
+    if (
+      currentQuestionHasBeenAnsweredBefore &&
+      currentQuestionHasBeenAnsweredBefore.length > 0
+    ) {
+      points -= currentQuestionHasBeenAnsweredBefore.points;
+      const rem = alreadyAnsweredQuestions.filter(
+        (ansObj) => ansObj.questionKey !== currentQuestion.key
+      );
+      this.setState({ points, playerSheet: [...rem, playerAnswerObj] });
+      return;
+    }
+    if (answerState.status === true) points += points;
+    this.setState({
+      points,
+      playerSheet: [...alreadyAnsweredQuestions, playerAnswerObj],
+    });
   }
 
   render() {
+    console.log("I am the answered sheet", this.state.playerSheet);
     const {
       questionReported,
       reportError,
