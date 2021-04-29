@@ -16,6 +16,7 @@ export default class DisplayMaker extends Component {
     this.setState({ textEntry: e.target.value });
     this.handleOnItemSelected(e.target.value);
   };
+  
   createDisplayForTextEntryAnswers() {
     return (
       <textarea
@@ -59,6 +60,7 @@ export default class DisplayMaker extends Component {
       this.handleOnItemSelected({ ans: answer, key });
     }
   }
+
   createDisplayForSingleQuestion() {
     const { question, answers } = this.props;
     return answers.map((answer, index) => {

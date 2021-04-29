@@ -1,6 +1,6 @@
 import { ANSWER_TYPES } from "../db/questions-db";
 
-class Validator {
+export default class Validator {
   constructor(question, answer) {
     this.type = question.type;
     this.answer = answer;
@@ -12,9 +12,10 @@ class Validator {
       question: this.question,
       answer: this.answer,
     };
+    var status;
     switch (this.type) {
       case ANSWER_TYPES.MULTIPLE:
-        const status = this.validateMultipleAnswerQuestion();
+        status = this.validateMultipleAnswerQuestion();
         return {
           ...result,
           status: status.status,
@@ -24,14 +25,14 @@ class Validator {
         };
 
       case ANSWER_TYPES.TEXT_ENTRY:
-        const status = this.validateEntryAnswerQuestion(); 
-        return { 
-          ...result, 
-          points: status ? this.question.points : 0
-        }
+        status = this.validateEntryAnswerQuestion();
+        return {
+          ...result,
+          points: status ? this.question.points : 0,
+        };
 
       case ANSWER_TYPES.SINGLE:
-        const status = this.validateSingleType();
+        status = this.validateSingleType();
         return { ...result, status, points: status ? this.points : 0 };
 
       case ANSWER_TYPES.DRAG_AND_DROP:
@@ -65,7 +66,7 @@ class Validator {
    *
    */
   validateSingleType() {
-    this.answer.isAnswer;
+    return this.answer.ans.isAnswer;
   }
 
   /**
@@ -115,11 +116,11 @@ class Validator {
   validateMultipleAnswerQuestion() {
     const { possibleAnswers, points } = this.question.possibleAnswers;
     const answers = this.answer || [];
-    const correct,
+    var correct,
       wrong = [];
-    answers.forEach((ans) => {
-      if (ans.isAnswer) correct.push(ans);
-      else wrong.push(ans);
+    answers.forEach((answer) => {
+      if (answer.ans.isAnswer) correct.push(answer);
+      else wrong.push(answer);
     });
     var pointsEarned = (correct.length / possibleAnswers.expected) * points;
     return { status: !!pointsEarned, correct, wrong };

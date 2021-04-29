@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { questions } from "../db/questions-db";
 import DisplayMaker from "../factory/DisplayMaker";
 import CompletionPage from "./CompletionPage";
+import Validator from "./../factory/Validator";
 const FORWARD = "FORWARD";
 const BACK = "BACK";
 export default class Play extends Component {
@@ -25,6 +26,7 @@ export default class Play extends Component {
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveToQuestion = this.moveToQuestion.bind(this);
+    this.onAnswered = this.onAnswered.bind(this);
   }
 
   getQuestionButtonClasses(key) {
@@ -119,6 +121,35 @@ export default class Play extends Component {
     }
   }
 
+  onAnswered(data) {
+    console.log("i am the data bro", data);
+    if (!data) return;
+    const { currentQuestion, points } = this.state;
+    const validator = new Validator(currentQuestion, data);
+    const answerState = validator.answerIsCorrect();
+    var alreadyAnsweredQuestions = this.state.playerSheet || []
+    var currentQuestionHasBeenAnsweredBefore = alreadyAnsweredQuestions.filter( ansObj => ansObj.questionKey === currentQuestion.key)
+    if(currentQuestionHasBeenAnsweredBefore && currentQuestionHasBeenAnsweredBefore.length > 0 ){
+
+      // to be continued
+
+    }
+    if (answerState.status === true) points += points;
+  
+
+    const playerAnswerObj = {
+      wasRight: answerState.status,
+      question: currentQuestion,
+      questionKey: currentQuestion.key,
+      answer:data, 
+      pointsEarned:answerState.points,
+      wrong: answerState.wrong, 
+      correct:answerState.correct
+    };
+
+    this.setState({points,})
+  }
+
   render() {
     const {
       questionReported,
@@ -168,6 +199,7 @@ export default class Play extends Component {
                 }
                 question={currentQuestion}
                 type={currentQuestion.type}
+                onAnswered={this.onAnswered}
               />
 
               <div className="bottom-directions" style={{ marginTop: 20 }}>
