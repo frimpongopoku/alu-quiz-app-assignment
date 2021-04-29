@@ -7,12 +7,25 @@ export default class DisplayMaker extends Component {
     super(props);
     this.state = {
       selected: null,
+      textEntry: "",
     };
   }
 
+  handleOnChange = (e) => {
+    this.setState({ textEntry: e.target.value });
+  };
+  createDisplayForTextEntryAnswers() {
+    // const { questions } = this.propÏs;
+    return (
+      <textarea
+        placeholder="#Write your css here..."
+        className="text-entry-box"
+        onChange={this.handleOnChange}
+      ></textarea>
+    );
+  }
   pushAnswerToState(key, answer) {
     const { selected } = this.state;
-
     if (selected && selected.key === key)
       this.setState({
         selected: null,
@@ -82,6 +95,7 @@ export default class DisplayMaker extends Component {
       );
     });
   }
+
   renderContent() {
     const { type } = this.props;
     switch (type) {
@@ -90,7 +104,7 @@ export default class DisplayMaker extends Component {
       case ANSWER_TYPES.SINGLE:
         return this.createDisplayForSingleQuestion();
       case ANSWER_TYPES.TEXT_ENTRY:
-        return <i></i>;
+        return this.createDisplayForTextEntryAnswers();
       default:
         return <p>.... Uknown ...</p>;
     }

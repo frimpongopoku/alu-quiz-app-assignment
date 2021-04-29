@@ -18,7 +18,7 @@ export default class Play extends Component {
       questions: questions,
       questionReported: false,
       reportError: false,
-      reported
+      complete: false,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -52,13 +52,12 @@ export default class Play extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
-    const { questionReported, reportError } = this.state;
+    const { questionReported, reportError, complete } = this.state;
 
     return (
       <div>
-        <CompletionPage />
+        {complete && <CompletionPage />}
         <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
-
           {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
           <center>
             <h1>CSS FOUNDATIONS AND OTHER BLUH BLUH</h1>

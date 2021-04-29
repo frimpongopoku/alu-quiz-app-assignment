@@ -22,30 +22,41 @@ export default class CompletionPage extends Component {
   }
   render() {
     return (
-      <div className="row" style={{ marginTop: "10%" }}>
-        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-          <center>
-            <img src={cup} style={{ height: 200 }} alt="reward media" />
-            <h1 className="raw-score">85%</h1>
-          </center>
-        </div>
-        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-          <h3>
-            <b>QUIZ BREAK DOWN</b>
-          </h3>
-          {this.renderLoaders()}
-          <br />
-          <br />
-          <a
-            href="#void"
-            style={{
-              fontSize: 26,
-              textDecoration: "underline",
-              color: "maroon",
-            }}
-          >
-            Resourses To Learn From
-          </a>
+      <div className="complete-modal-container">
+        <div className="complete-overlay"></div>
+        <div className="complete-modal-body lift">
+          <div className="row" style={{ marginTop: "10%" }}>
+            <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+              <center>
+                <img src={cup} style={{ height: 200 }} alt="reward media" />
+                <h1 className="raw-score">85%</h1>
+
+                <p style={{ fontWeight: "bold", color: "grey", fontSize: 13 }}>
+                  Use the button below to compare your <br /> answers to the
+                  write ones
+                </p>
+                <button className="review-work-btn">Review My Work</button>
+              </center>
+            </div>
+            <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+              <h3>
+                <b>QUIZ BREAK DOWN</b>
+              </h3>
+              {this.renderLoaders()}
+              <br />
+              <br />
+              <a
+                href="#void"
+                style={{
+                  fontSize: 26,
+                  textDecoration: "underline",
+                  color: "maroon",
+                }}
+              >
+                Resourses To Learn From
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -33,10 +33,10 @@ class LandingPage extends Component {
     return (
       <div className="c-container">
         <div className="up-div">
-          <h1>WELCOME TO PURPLE GAMES</h1>
+          {/* <h1>WELCOME TO PURPLE GAMES</h1>
           <h3>
             Think you are a CSS champion? <br /> Lets Find Out!
-          </h3>
+          </h3> */}
         </div>
 
         {showCircle && (

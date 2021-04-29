@@ -1,3 +1,66 @@
+.complete-modal-body {
+  z-index: 12;
+  background: white;
+  margin: 7% auto;
+  width: 65%;
+  max-height: 630px;
+  border-radius: 15px;
+}
+
+.review-work-btn {
+  background: orange;
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 6px;
+  border: 0px;
+  box-shadow: 0;
+}
+
+.review-work-btn:hover{ 
+  background:green; 
+  transition: .2s ease-out;
+}
+.complete-modal-container {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.complete-overlay {
+  background: black;
+  height: 100vh;
+  width: 100%;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 11;
+}
+
+.text-entry-box {
+  background: #3c3d5f;
+  color: orange;
+  font-size: 17px;
+  white-space: pre-wrap;
+  width: 100%;
+  border-radius: 13px;
+  font-weight: bold;
+  padding: 25px;
+  border: solid 3px orange;
+  resize: none;
+  min-height: 270px;
+}
+
+.text-entry-box:focus {
+  outline: 0;
+}
+
+.text-entry-box::placeholder {
+  font-style: italic;
+  color: whitesmoke;
+}
+
 .chosen-answer-active {
   background: green;
   color: white;
