@@ -12,10 +12,10 @@ export const questions = [
       title: "CSS SELECTORS",
       resources: "https://www.w3schools.com/css/css_selectors.asp",
     },
+    settings: { hasHTML: true },
     type: ANSWER_TYPES.MULTIPLE,
     points: 10,
-    question:
-      "Which of the following is an acceptable way of setting a background color of 'red' to div in css. Select all the apply",
+    title: `Which of the following is an acceptable way of setting a background color of <span style='font-weight:bold; color:red'>red</span> to div in css? Select all the apply.`,
     feedback: "",
     possibleAnswers: {
       expected: 2,
@@ -51,9 +51,10 @@ export const questions = [
       title: "CSS SYNTAX FORMAT",
       resources: "https://www.w3schools.com/css/css_syntax.asp",
     },
+    settings: { hasHTML: false },
     type: ANSWER_TYPES.SINGLE,
     points: 5,
-    question: "Which of the following is the correct format for the CSS?",
+    title: "Which of the following is the correct format for the CSS?",
     possibleAnswers: {
       feedback:
         "CSS syntax is composed of selector and declaration wherein selector points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons.Each declaration includes a CSS property name and a value, separated by a colon and declaration blocks are surrounded by curly braces",
@@ -89,14 +90,15 @@ export const questions = [
       title: "CSS SELECTORS ID",
       resources: "https://www.w3schools.com/css/css_selectors.asp",
     },
+    settings: { hasHTML: false },
     type: ANSWER_TYPES.SINGLE,
     points: 5,
-    question:
+    title:
       "Which of the following examples is the correct way to use CSS ID selector?",
     possibleAnswers: {
       feedback:
         "Hash (#) character is being used to select an element with a specific id. An ID name cannot start with a number",
-      settings: { hasStyles: false, style: {} },
+      settings: { hasStyles: false, style: { whitespace: "pre-wrap" } },
       options: [
         {
           letter: "A",
@@ -135,6 +137,8 @@ export const questions = [
       title: "CSS MARGINS",
       resources: " https://www.w3schools.com/css/css_margin.asp",
     },
+    title: { hasHTML: false },
+    settings: { hasHTML: false },
     type: ANSWER_TYPES.MULTIPLE,
     points: 5,
     question:
@@ -175,9 +179,10 @@ export const questions = [
       resources:
         "https://stackoverflow.com/questions/4718342/lots-of-dom-hidden-vs-display-none#:~:text=Because%20display%3A%20none%20actually%20removes,but%20they're%20still%20there.",
     },
+    settings: { hasHTML: true },
     type: ANSWER_TYPES.TEXT_ENTRY,
     points: 10,
-    question: (
+    title: (
       <span>
         Using the editor provided below, assign a css property to a <b>div</b>{" "}
         with a class name <b>.kula</b> in order to make disappear, and removed
@@ -187,7 +192,7 @@ export const questions = [
     possibleAnswers: {
       feedback:
         "If you specify 'display: none', the browser does not take that element into consideration when painting.",
-      settings: { hasStyles: false, style: {}, hasHTML: true },
+      settings: { hasStyles: false, style: {} },
       correctAnswer: ".kula{display:none;}",
     },
   },

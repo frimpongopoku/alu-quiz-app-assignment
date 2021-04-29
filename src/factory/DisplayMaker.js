@@ -13,6 +13,7 @@ export default class DisplayMaker extends Component {
 
   handleOnChange = (e) => {
     this.setState({ textEntry: e.target.value });
+    this.handleOnItemSelected(e.target.value);
   };
   createDisplayForTextEntryAnswers() {
     // const { questions } = this.propÏs;
@@ -26,11 +27,15 @@ export default class DisplayMaker extends Component {
   }
   pushAnswerToState(key, answer) {
     const { selected } = this.state;
-    if (selected && selected.key === key)
+    if (selected && selected.key === key) {
       this.setState({
         selected: null,
       });
-    else this.setState({ selected: { ans: answer, key } });
+      this.handleOnItemSelected(null);
+    } else {
+      this.setState({ selected: { ans: answer, key } });
+      this.handleOnItemSelected({ ans: answer, key });
+    }
   }
   createDisplayForSingleQuestion() {
     const { question, answers } = this.props;
@@ -60,9 +65,11 @@ export default class DisplayMaker extends Component {
     if (found.length > 0) {
       const rem = selected.filter((ans) => ans.key !== key);
       this.setState({ selected: rem });
+      this.handleOnItemSelected(selected);
     } else {
       selected.push({ ans: answer, key });
       this.setState({ selected });
+      this.handleOnItemSelected(selected);
     }
   }
 
@@ -77,10 +84,9 @@ export default class DisplayMaker extends Component {
   }
   createDisplayForMultipleAnswerQuestion() {
     const { question, answers } = this.props;
-    const { key } = question;
-    return answers.map((answer, index) => {
+    return (answers || []).map((answer, index) => {
       const letter = NumToAlpha(index);
-      const id = key + "->" + letter;
+      const id = question.key + "->" + letter;
       return (
         <p
           className={`one-answer ${
@@ -89,12 +95,17 @@ export default class DisplayMaker extends Component {
           key={index.toString()}
           onClick={() => this.pushMultipleAnswersToState(id, answer)}
         >
-          <b>{letter}.</b> The {index + 1} option is this first one, what do you
-          think
+          <b>{letter}.</b> {answer.text}
         </p>
       );
     });
   }
+
+  handleOnItemSelected = (data) => {
+    const { onAnswered } = this.props;
+    if (!onAnswered) return;
+    onAnswered(data);
+  };
 
   renderContent() {
     const { type } = this.props;

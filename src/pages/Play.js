@@ -16,31 +16,62 @@ export default class Play extends Component {
     super(props);
     this.state = {
       questions: questions,
-      currentQuestion:null,
+      currentQuestion: questions[0],
       questionReported: false,
       reportError: false,
       complete: false,
+      points:0, // player's points earned over the entire quiz
+      playerSheet:[]
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   renderPossibleAnswers() {
-    return [2, 3, 5, 6].map((item, index) => {
+    const { currentQuestion } = this.state;
+    return currentQuestion.possibleAnswers.options.map((ans, index) => {
       return (
         <p className="one-answer multi-chosen-answer" key={index.toString()}>
-          <b>{NumToAlpha(index)}.</b> The {index + 1} option is this first one,
-          what do you think
+          <b>{NumToAlpha(index)}.</b> {ans.text}
         </p>
       );
     });
   }
+  getQuestionButtonClasses(key) {
+    const { currentQuestion, playerSheet } = this.state;
+    var classes = "";
+    if (currentQuestion.key === key) classes += " q-in-motion";
+    const foundInAnswered = playerSheet.filter(obj => obj.question.key === key); 
+    if(foundInAnswered && foundInAnswered.length >0) classes +=" q-compeleted"
+    return classes;
+  }
   renderQuestions() {
-    return [0, 1, 2, 3, 3, 5].map((item, index) => {
+    const { questions } = this.state;
+    return questions.map((Q, index) => {
       return (
-        <div className="one-question q-completed" key={index.toString()}>
+        <div
+          className={`q-default one-question ${this.getQuestionButtonClasses(
+            Q.key
+          )}`}
+          key={index.toString()}
+        >
           <p>Question {index + 1}</p>
         </div>
       );
     });
+  }
+
+  renderQuestionTitle() {
+    const question = this.state.currentQuestion;
+    if (!question) return <span>...</span>;
+
+    if (question.settings.hasHTML)
+      return (
+        <h1
+          className="question"
+          dangerouslySetInnerHTML={{ __html: question.title }}
+        ></h1>
+      );
+
+    return <h1 className="question">{question.title}</h1>;
   }
 
   submitReport() {
@@ -78,7 +109,6 @@ export default class Play extends Component {
                   alt="user's profile"
                   src="https://i.pravatar.cc/200"
                 />
-
                 <p>Frimpong O. Agyemang</p>
               </div>
               <div className="all-questions-content" style={{ marginTop: 10 }}>
@@ -88,17 +118,17 @@ export default class Play extends Component {
 
             {/* -----------------------------------------  MAIN QUESTION AREA ------------------------------------------ */}
             <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12">
-              <h1 className="question">
-                This is a very deep question that is being asked...? Do you
-                understand what I am saying? It is quite deep, please answer?
-              </h1>
+              {this.renderQuestionTitle()}
 
               {/* {this.renderPossibleAnswers()} */}
 
               <DisplayMaker
-                answers={[3, 4, 5, 6]}
-                question={{ key: "kerekjsdf" }}
-                type={ANSWER_TYPES.TEXT_ENTRY}
+                answers={
+                  this.state.currentQuestion &&
+                  this.state.currentQuestion.possibleAnswers.options
+                }
+                question={this.state.currentQuestion}
+                type={ANSWER_TYPES.MULTIPLE}
               />
               <div className="bottom-directions" style={{ marginTop: 20 }}>
                 <center>

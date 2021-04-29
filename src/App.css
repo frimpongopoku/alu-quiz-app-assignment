@@ -190,6 +190,7 @@
 }
 
 .one-question {
+  cursor: pointer;
   width: 100%;
   padding: 10px;
   text-align: center;
@@ -206,8 +207,9 @@
   color: grey;
   border: solid 2px grey;
 }
-.q-completed > p {
-  color: grey;
+.q-in-motion{ 
+  color:#c58002; 
+  border: solid 2px #c58002;
 }
 .q-completed {
   color: black;
