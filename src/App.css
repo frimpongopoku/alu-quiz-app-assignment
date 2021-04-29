@@ -17,9 +17,9 @@
   box-shadow: 0;
 }
 
-.review-work-btn:hover{ 
-  background:green; 
-  transition: .2s ease-out;
+.review-work-btn:hover {
+  background: green;
+  transition: 0.2s ease-out;
 }
 .complete-modal-container {
   display: flex;
@@ -49,7 +49,7 @@
   padding: 25px;
   border: solid 3px orange;
   resize: none;
-  min-height: 270px;
+  min-height: 238px;
 }
 
 .text-entry-box:focus {
@@ -204,11 +204,18 @@
   text-transform: uppercase;
 }
 .q-default {
-  color: grey;
-  border: solid 2px grey;
+  /* color: grey;
+  border: solid 2px grey; */
+  color: black;
+  border: solid 2px black;
 }
-.q-in-motion{ 
-  color:#c58002; 
+.q-default:hover {
+  transform: scale(1.01);
+  transition: 0.2s ease-out;
+}
+
+.q-in-motion {
+  color: #c58002;
   border: solid 2px #c58002;
 }
 .q-completed {

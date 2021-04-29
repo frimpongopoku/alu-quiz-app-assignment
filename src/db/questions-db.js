@@ -15,7 +15,7 @@ export const questions = [
     settings: { hasHTML: true },
     type: ANSWER_TYPES.MULTIPLE,
     points: 10,
-    title: `Which of the following is an acceptable way of setting a background color of <span style='font-weight:bold; color:red'>red</span> to div in css? Select all the apply.`,
+    title: `Which of the following is an acceptable way of setting a background color of <span style='font-weight:bold; color:red'>red</span> to div in css? Select all that apply.`,
     feedback: "",
     possibleAnswers: {
       expected: 2,
@@ -98,7 +98,7 @@ export const questions = [
     possibleAnswers: {
       feedback:
         "Hash (#) character is being used to select an element with a specific id. An ID name cannot start with a number",
-      settings: { hasStyles: false, style: { whitespace: "pre-wrap" } },
+      settings: { hasStyles: true, style: { whitespace: "pre-wrap" } },
       options: [
         {
           letter: "A",
@@ -127,6 +127,15 @@ export const questions = [
           `,
           isAnswer: false,
         },
+        {
+          letter: "D",
+          text: ` #'sen1' {
+            text-align: center;
+            color: red;
+          }
+          `,
+          isAnswer: false,
+        },
       ],
     },
   },
@@ -137,12 +146,11 @@ export const questions = [
       title: "CSS MARGINS",
       resources: " https://www.w3schools.com/css/css_margin.asp",
     },
-    title: { hasHTML: false },
     settings: { hasHTML: false },
     type: ANSWER_TYPES.MULTIPLE,
     points: 5,
-    question:
-      " Which of the following can be a possible value for margin properties? ",
+    title:
+      " Which of the following can be a possible value for margin properties? Select all that apply. ",
     possibleAnswers: {
       expected: 2,
       feedback: "B and D do not exist as values in CSS margin properties.",
@@ -182,13 +190,11 @@ export const questions = [
     settings: { hasHTML: true },
     type: ANSWER_TYPES.TEXT_ENTRY,
     points: 10,
-    title: (
-      <span>
-        Using the editor provided below, assign a css property to a <b>div</b>{" "}
-        with a class name <b>.kula</b> in order to make disappear, and removed
-        from the DOM
-      </span>
-    ),
+    title: `
+        <span style='font-size:30px'>Using the editor provided below, assign a css property to a <b>div</b>
+        with a class name <b>kula</b> in order to make disappear, and removed
+        from the DOM.</span><br/>
+     `,
     possibleAnswers: {
       feedback:
         "If you specify 'display: none', the browser does not take that element into consideration when painting.",

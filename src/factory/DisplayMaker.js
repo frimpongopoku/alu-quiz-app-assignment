@@ -16,7 +16,6 @@ export default class DisplayMaker extends Component {
     this.handleOnItemSelected(e.target.value);
   };
   createDisplayForTextEntryAnswers() {
-    // const { questions } = this.propÏs;
     return (
       <textarea
         placeholder="#Write your css here..."
@@ -39,10 +38,9 @@ export default class DisplayMaker extends Component {
   }
   createDisplayForSingleQuestion() {
     const { question, answers } = this.props;
-    const { key } = question;
     return answers.map((answer, index) => {
       const letter = NumToAlpha(index);
-      const id = key + "->" + letter;
+      const id = question.key + "->" + letter;
       return (
         <p
           className={`one-answer ${
@@ -51,8 +49,7 @@ export default class DisplayMaker extends Component {
           key={index.toString()}
           onClick={() => this.pushAnswerToState(id, answer)}
         >
-          <b>{letter}.</b> The {index + 1} option is this first one, what do you
-          think
+          <b>{letter}.</b> {answer.text}
         </p>
       );
     });

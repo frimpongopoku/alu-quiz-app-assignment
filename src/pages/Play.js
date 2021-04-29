@@ -5,42 +5,37 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
-// import Confetti from "react-confetti";
-import { NumToAlpha } from "../db/keys";
-import { ANSWER_TYPES, questions } from "../db/questions-db";
+import { questions } from "../db/questions-db";
 import DisplayMaker from "../factory/DisplayMaker";
 import CompletionPage from "./CompletionPage";
-
+const FORWARD = "FORWARD";
+const BACK = "BACK";
 export default class Play extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: questions,
       currentQuestion: questions[0],
+      currentQuestionIndex: 0,
       questionReported: false,
       reportError: false,
       complete: false,
-      points:0, // player's points earned over the entire quiz
-      playerSheet:[]
+      points: 0, // player's points earned over the entire quiz
+      playerSheet: [],
     };
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.moveToQuestion = this.moveToQuestion.bind(this);
   }
-  renderPossibleAnswers() {
-    const { currentQuestion } = this.state;
-    return currentQuestion.possibleAnswers.options.map((ans, index) => {
-      return (
-        <p className="one-answer multi-chosen-answer" key={index.toString()}>
-          <b>{NumToAlpha(index)}.</b> {ans.text}
-        </p>
-      );
-    });
-  }
+
   getQuestionButtonClasses(key) {
     const { currentQuestion, playerSheet } = this.state;
     var classes = "";
     if (currentQuestion.key === key) classes += " q-in-motion";
-    const foundInAnswered = playerSheet.filter(obj => obj.question.key === key); 
-    if(foundInAnswered && foundInAnswered.length >0) classes +=" q-compeleted"
+    // const foundInAnswered = playerSheet.filter(
+    //   (obj) => obj.question.key === key
+    // );
+    // if (foundInAnswered && foundInAnswered.length > 0)
+    //   classes += " q-compeleted";
     return classes;
   }
   renderQuestions() {
@@ -48,10 +43,11 @@ export default class Play extends Component {
     return questions.map((Q, index) => {
       return (
         <div
-          className={`q-default one-question ${this.getQuestionButtonClasses(
+          className={`q-default one-question  ${this.getQuestionButtonClasses(
             Q.key
           )}`}
           key={index.toString()}
+          onClick={() => this.moveToQuestion(index, null)}
         >
           <p>Question {index + 1}</p>
         </div>
@@ -62,7 +58,6 @@ export default class Play extends Component {
   renderQuestionTitle() {
     const question = this.state.currentQuestion;
     if (!question) return <span>...</span>;
-
     if (question.settings.hasHTML)
       return (
         <h1
@@ -70,7 +65,6 @@ export default class Play extends Component {
           dangerouslySetInnerHTML={{ __html: question.title }}
         ></h1>
       );
-
     return <h1 className="question">{question.title}</h1>;
   }
 
@@ -83,8 +77,54 @@ export default class Play extends Component {
   handleOnChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  showDirectionalBtns() {
+    const { playerSheet, questions } = this.state;
+    if (playerSheet.length === questions.length)
+      return <button>Done, Submit My Answers</button>;
+    return (
+      <center>
+        <button
+          className="round-btns lift-slightly"
+          onClick={() => this.moveToQuestion(null, BACK)}
+        >
+          <FontAwesomeIcon icon={faLongArrowAltLeft} />
+        </button>
+        <button
+          className="round-btns lift-slightly"
+          onClick={() => this.moveToQuestion(null, FORWARD)}
+        >
+          <FontAwesomeIcon icon={faLongArrowAltRight} />
+        </button>
+      </center>
+    );
+  }
+
+  setNewQuestion(index, question) {
+    this.setState({ currentQuestion: question, currentQuestionIndex: index });
+  }
+  moveToQuestion(index, direction) {
+    const { currentQuestionIndex } = this.state;
+    if (!direction)
+      return this.setNewQuestion(index, this.state.questions[index]);
+    var ind;
+    if (direction === FORWARD) {
+      ind = currentQuestionIndex + 1;
+      if (ind < this.state.questions.length)
+        this.setNewQuestion(ind, this.state.questions[ind]);
+    } else if (direction === BACK) {
+      ind = currentQuestionIndex - 1;
+      if (currentQuestionIndex > 0)
+        this.setNewQuestion(ind, this.state.questions[ind]);
+    }
+  }
   render() {
-    const { questionReported, reportError, complete } = this.state;
+    const {
+      questionReported,
+      reportError,
+      complete,
+      currentQuestion,
+    } = this.state;
 
     return (
       <div>
@@ -92,7 +132,7 @@ export default class Play extends Component {
         <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
           {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
           <center>
-            <h1>CSS FOUNDATIONS AND OTHER BLUH BLUH</h1>
+            <h1>{currentQuestion && currentQuestion.topic.title}</h1>
             <br />
           </center>
           <div className="top-line"></div>
@@ -124,21 +164,13 @@ export default class Play extends Component {
 
               <DisplayMaker
                 answers={
-                  this.state.currentQuestion &&
-                  this.state.currentQuestion.possibleAnswers.options
+                  currentQuestion && currentQuestion.possibleAnswers.options
                 }
-                question={this.state.currentQuestion}
-                type={ANSWER_TYPES.MULTIPLE}
+                question={currentQuestion}
+                type={currentQuestion.type}
               />
               <div className="bottom-directions" style={{ marginTop: 20 }}>
-                <center>
-                  <button className="round-btns lift-slightly">
-                    <FontAwesomeIcon icon={faLongArrowAltLeft} />
-                  </button>
-                  <button className="round-btns lift-slightly">
-                    <FontAwesomeIcon icon={faLongArrowAltRight} />
-                  </button>
-                </center>
+                {this.showDirectionalBtns()}
               </div>
             </div>
 
