@@ -15,9 +15,11 @@ export const questions = [
     settings: { hasHTML: true },
     type: ANSWER_TYPES.MULTIPLE,
     points: 10,
-    title: `Which of the following is an acceptable way of setting a background color of <span style='font-weight:bold; color:red'>red</span> to div in css? Select all that apply.`,
-    feedback: "",
+    title: `Which of the following is an acceptable way of setting a background color of <span style='font-weight:bold; color:red'>red</span> to a div in css? Select all that apply.`,
+
     possibleAnswers: {
+      feedback:
+        "CSS is able to read its properties and values as valid variables, they do not need to be written in quotes.",
       expected: 2,
       settings: { hasStyles: false, style: {} },
       options: [
@@ -38,7 +40,7 @@ export const questions = [
         },
         {
           letter: "D",
-          text: "div      { background:    red;    }",
+          text: `div      { background:    red;    }`,
           isAnswer: true,
         },
       ],
@@ -164,7 +166,7 @@ export const questions = [
         {
           letter: "B",
           text: "?",
-          isAnswer: true,
+          isAnswer: false,
         },
         {
           letter: "C",

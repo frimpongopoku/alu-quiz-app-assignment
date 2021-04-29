@@ -27,23 +27,23 @@ export default class DisplayMaker extends Component {
     );
   }
 
-  sameQuestion() {
-    const { selected, multiSelected } = this.state;
-    if (this.props.type === ANSWER_TYPES.SINGLE) {
-      if (!selected) return true;
-      else {
-        const key = selected.key.split("->")[0];
-        return this.props.question.key === key;
-      }
-    } else if (this.props.type === ANSWER_TYPES.MULTIPLE) {
-      if (!multiSelected || multiSelected.length === 0) return true;
-      else {
-        const one = multiSelected[0];
-        return one.key.split("->")[0] === this.props.question.key;
-      }
-    }
-    return false;
-  }
+  // sameQuestion() {
+  //   const { selected, multiSelected } = this.state;
+  //   if (this.props.type === ANSWER_TYPES.SINGLE) {
+  //     if (!selected) return true;
+  //     else {
+  //       const key = selected.key.split("->")[0];
+  //       return this.props.question.key === key;
+  //     }
+  //   } else if (this.props.type === ANSWER_TYPES.MULTIPLE) {
+  //     if (!multiSelected || multiSelected.length === 0) return true;
+  //     else {
+  //       const one = multiSelected[0];
+  //       return one.key.split("->")[0] === this.props.question.key;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   pushAnswerToState(key, answer) {
     const { selected } = this.state;
@@ -62,14 +62,14 @@ export default class DisplayMaker extends Component {
   }
 
   createDisplayForSingleQuestion() {
-    const { question, answers } = this.props;
+    const { question, answers, reviewMode } = this.props;
     return answers.map((answer, index) => {
       const letter = NumToAlpha(index);
       const id = question.key + "->" + letter;
       return (
         <p
-          className={`one-answer ${
-            this.answerIsSelected(id) ? `chosen-answer-active` : ""
+          className={`one-answer ${this.reviewAnswerAndGetProps(id, answer)} ${
+            reviewMode && answer.isAnswer ? `chosen-answer-right` : ""
           }`}
           key={index.toString()}
           onClick={() => this.pushAnswerToState(id, answer)}
@@ -81,16 +81,9 @@ export default class DisplayMaker extends Component {
   }
 
   pushMultipleAnswersToState(key, answer) {
-    var { multiSelected } = this.state;
-    var isTheSameQuestion = this.sameQuestion();
     var selected = this.props.chosenAnswer || [];
     const obj = { ans: answer, key };
     const found = selected.filter((ans) => ans.key === key);
-    // if (!isTheSameQuestion) {
-    //   this.setState({ multiSelected: [obj] });
-    //   this.handleOnItemSelected([obj]);
-    //   return;
-    // }
     if (found.length > 0) {
       // if answer has already been selected, remove from the list of selected
       const rem = selected.filter((ans) => ans.key !== key);
@@ -115,15 +108,25 @@ export default class DisplayMaker extends Component {
       return selected && !!isIn.length;
     }
   }
+
+  reviewAnswerAndGetProps(id, answer) {
+    const { reviewMode } = this.props;
+    const ansIsSelected = this.answerIsSelected(id);
+    if (reviewMode && ansIsSelected && !answer.isAnswer)
+      return "chosen-answer-wrong";
+    if (!reviewMode && ansIsSelected) return "chosen-answer-active";
+  }
+
   createDisplayForMultipleAnswerQuestion() {
-    const { question, answers } = this.props;
+    const { question, answers, reviewMode } = this.props;
     return (answers || []).map((answer, index) => {
       const letter = NumToAlpha(index);
       const id = question.key + "->" + letter;
+      // const _class = reviewMode && this.answerIsSelected ? answer.isAnswer
       return (
         <p
-          className={`one-answer ${
-            this.answerIsSelected(id) ? `chosen-answer-active` : ""
+          className={`one-answer ${this.reviewAnswerAndGetProps(id, answer)} ${
+            reviewMode && answer.isAnswer ? `chosen-answer-right` : ""
           }`}
           key={index.toString()}
           onClick={() => this.pushMultipleAnswersToState(id, answer)}
@@ -135,8 +138,8 @@ export default class DisplayMaker extends Component {
   }
 
   handleOnItemSelected = (data) => {
-    const { onAnswered } = this.props;
-    if (!onAnswered) return;
+    const { onAnswered, reviewMode } = this.props;
+    if (!onAnswered || reviewMode) return;
     onAnswered(data);
   };
 
@@ -154,7 +157,6 @@ export default class DisplayMaker extends Component {
     }
   }
   render() {
-    console.log("I am the chosen answer", this.props.chosenAnswer);
     return <div>{this.renderContent()} </div>;
   }
 }

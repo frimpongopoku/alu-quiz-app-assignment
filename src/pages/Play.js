@@ -28,8 +28,13 @@ export default class Play extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveToQuestion = this.moveToQuestion.bind(this);
     this.onAnswered = this.onAnswered.bind(this);
+    this.toggleReviewMode = this.toggleReviewMode.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
+  toggleModal(val) {
+    this.setState({ complete: val });
+  }
   getQuestionButtonClasses(key) {
     const { currentQuestion } = this.state;
     var classes = "";
@@ -82,14 +87,42 @@ export default class Play extends Component {
   }
 
   showFootItems() {
-    const { playerSheet, questions, reviewMode } = this.state;
+    const { playerSheet, questions, reviewMode, currentQuestion } = this.state;
+
     if (reviewMode) {
-      <p className="feedback">
-        This is some nice feedback that you dont even know
-      </p>;
+      const queInView = this.getPlayersChosenAnswersForQuestion();
+      return (
+        <>
+          <center>
+            <h4>
+              <b>
+                {Number(queInView.pointsEarned)} /{" "}
+                {Number(queInView.question.points)}
+              </b>
+            </h4>
+          </center>
+          <h4
+            style={{
+              fontWeight: "bold",
+              color: "green",
+              textDecoration: "underline",
+            }}
+          >
+            FEEDBACK
+          </h4>
+          <p className="feedback">{currentQuestion.possibleAnswers.feedback}</p>
+        </>
+      );
     }
     if (playerSheet.length === questions.length) {
-      return <button className="finish-btn">Finsh, See My Result</button>;
+      return (
+        <button
+          className="finish-btn"
+          onClick={() => this.setState({ complete: true })}
+        >
+          Finsh, See My Result
+        </button>
+      );
     }
 
     return (
@@ -130,7 +163,6 @@ export default class Play extends Component {
   }
 
   onAnswered(data) {
-    console.log("I am the data", data);
     if (!data) return;
     const { currentQuestion } = this.state;
 
@@ -174,8 +206,17 @@ export default class Play extends Component {
     });
   }
 
+  getPlayersChosenAnswersForQuestion() {
+    const { currentQuestion, playerSheet } = this.state;
+    const found = playerSheet.filter(
+      (recordedAnswers) => recordedAnswers.questionKey === currentQuestion.key
+    );
+    return found[0] || {};
+  }
+  toggleReviewMode(val) {
+    this.setState({ reviewMode: val });
+  }
   render() {
-    console.log("I am the answered sheet", this.state.playerSheet);
     const {
       questionReported,
       reportError,
@@ -185,7 +226,13 @@ export default class Play extends Component {
 
     return (
       <div>
-        {complete && <CompletionPage />}
+        {complete && (
+          <CompletionPage
+            sheet={this.state.playerSheet}
+            toggleReviewMode={this.toggleReviewMode}
+            toggleModal={this.toggleModal}
+          />
+        )}
         <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
           {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
           <center>
@@ -209,7 +256,18 @@ export default class Play extends Component {
                 <p>Frimpong O. Agyemang</p>
               </div>
               <div className="all-questions-content" style={{ marginTop: 10 }}>
-                <center>{this.renderQuestions()}</center>
+                <center>
+                  {this.renderQuestions()}
+                  {this.state.reviewMode && (
+                    <button
+                      style={{ width: "100%" }}
+                      className="review-work-btn"
+                      onClick={() => this.setState({ complete: true })}
+                    >
+                      SEE SCORE
+                    </button>
+                  )}
+                </center>
               </div>
             </div>
 
@@ -225,6 +283,8 @@ export default class Play extends Component {
                 question={currentQuestion}
                 type={currentQuestion.type}
                 onAnswered={this.onAnswered}
+                chosenAnswer={this.getPlayersChosenAnswersForQuestion().answer}
+                reviewMode={this.state.reviewMode}
               />
 
               <div className="bottom-directions" style={{ marginTop: 20 }}>

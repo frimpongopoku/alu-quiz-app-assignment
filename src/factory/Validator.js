@@ -34,7 +34,7 @@ export default class Validator {
 
       case ANSWER_TYPES.SINGLE:
         status = this.validateSingleType();
-        return { ...result, status, points: status ? this.points : 0 };
+        return { ...result, status, points: status ? this.question.points : 0 };
 
       case ANSWER_TYPES.DRAG_AND_DROP:
         break;
@@ -101,7 +101,7 @@ export default class Validator {
    * With this, we can easily determine how many points were obtained by doing the following
    * To obtain the points for all cases:
    * ---------------------------------------
-   *  let a = number of items in the correct answer array, b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
+   *  let a = number of items in the correct answer array, w= number of items that a player chose, but were wrong b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
    * Hence total points earned by user : PE = (a/b) * p
    * With this formular:
    * A fully answered question is  = maximum points attainable = p
@@ -126,8 +126,14 @@ export default class Validator {
       else wrong.push(answer);
     });
     var pointsEarned =
-      (Number(correct.length) / Number(possibleAnswers.expected)) *
+      ((Number(correct.length) - Number(wrong.length)) /
+        Number(possibleAnswers.expected)) *
       Number(points);
-    return { status: !!pointsEarned, correct, wrong, points: pointsEarned };
+    return {
+      status: !!(pointsEarned <= 0 ? 0 : pointsEarned),
+      correct,
+      wrong,
+      points: pointsEarned <= 0 ? 0 : pointsEarned,
+    };
   }
 }

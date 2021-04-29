@@ -83,17 +83,31 @@
   color: whitesmoke;
 }
 
-.chosen-answer-active {
+.chosen-answer-wrong {
+  background: maroon;
+  color: white;
+  cursor: pointer;
+  border-color: maroon !important;
+}
+.chosen-answer-right {
   background: green;
   color: white;
   border: white;
   cursor: pointer;
   border-color: green !important;
 }
+
+.chosen-answer-active {
+  background: orange;
+  color: white;
+  border: white;
+  cursor: pointer;
+  border-color: orange !important;
+}
 .chosen-answer-active:hover {
   transform: scale(1.02);
   transition: 0.2s ease-out;
-  border-color: green !important;
+  border-color: orange !important;
 }
 
 .top-line {
