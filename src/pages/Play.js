@@ -28,7 +28,7 @@ export default class Play extends Component {
   }
 
   getQuestionButtonClasses(key) {
-    const { currentQuestion, playerSheet } = this.state;
+    const { currentQuestion } = this.state;
     var classes = "";
     if (currentQuestion.key === key) classes += " q-in-motion";
     // const foundInAnswered = playerSheet.filter(
@@ -118,6 +118,7 @@ export default class Play extends Component {
         this.setNewQuestion(ind, this.state.questions[ind]);
     }
   }
+
   render() {
     const {
       questionReported,
@@ -159,7 +160,6 @@ export default class Play extends Component {
             {/* -----------------------------------------  MAIN QUESTION AREA ------------------------------------------ */}
             <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12">
               {this.renderQuestionTitle()}
-
               {/* {this.renderPossibleAnswers()} */}
 
               <DisplayMaker
@@ -169,6 +169,7 @@ export default class Play extends Component {
                 question={currentQuestion}
                 type={currentQuestion.type}
               />
+
               <div className="bottom-directions" style={{ marginTop: 20 }}>
                 {this.showDirectionalBtns()}
               </div>

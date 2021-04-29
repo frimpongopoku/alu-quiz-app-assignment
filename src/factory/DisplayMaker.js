@@ -7,6 +7,7 @@ export default class DisplayMaker extends Component {
     super(props);
     this.state = {
       selected: null,
+      multiSelected: [],
       textEntry: "",
     };
   }
@@ -24,14 +25,36 @@ export default class DisplayMaker extends Component {
       ></textarea>
     );
   }
+
+  sameQuestion() {
+    const { selected, multiSelected } = this.state;
+    if (this.props.type === ANSWER_TYPES.SINGLE) {
+      if (!selected) return true;
+      else {
+        const key = selected.key.split("->")[0];
+        return this.props.question.key === key;
+      }
+    } else if (this.props.type === ANSWER_TYPES.MULTIPLE) {
+      if (!multiSelected || multiSelected.length === 0) return true;
+      else {
+        const one = multiSelected[0];
+        return one.key.split("->")[0] === this.props.question.key;
+      }
+    }
+    return false;
+  }
+
   pushAnswerToState(key, answer) {
     const { selected } = this.state;
+    // const isTheSameQuestion = this.sameQuestion();
     if (selected && selected.key === key) {
+      // answer has already been clicked before, user wants to remove it
       this.setState({
         selected: null,
       });
       this.handleOnItemSelected(null);
     } else {
+      // user is now choosing an answer
       this.setState({ selected: { ans: answer, key } });
       this.handleOnItemSelected({ ans: answer, key });
     }
@@ -56,28 +79,38 @@ export default class DisplayMaker extends Component {
   }
 
   pushMultipleAnswersToState(key, answer) {
-    var { selected } = this.state;
-    selected = selected || [];
+    var { multiSelected } = this.state;
+    var isTheSameQuestion = this.sameQuestion();
+    var selected = multiSelected || [];
+    const obj = { ans: answer, key };
     const found = selected.filter((ans) => ans.key === key);
+    if (!isTheSameQuestion) {
+      this.setState({ multiSelected: [obj] });
+      this.handleOnItemSelected(obj);
+      return;
+    }
     if (found.length > 0) {
+      // if answer has already been selected, remove from the list of selected
       const rem = selected.filter((ans) => ans.key !== key);
-      this.setState({ selected: rem });
+      this.setState({ multiSelected: rem });
       this.handleOnItemSelected(selected);
     } else {
-      selected.push({ ans: answer, key });
-      this.setState({ selected });
-      this.handleOnItemSelected(selected);
+      // answer has not been selected, so go ahead and add
+      this.setState({ multiSelected: [...selected, obj] });
+      this.handleOnItemSelected(obj);
     }
   }
 
   answerIsSelected(answerKey) {
     const { type } = this.props;
-    const selected = this.state.selected || [];
+    const selected = this.state.selected;
+    const multi = this.state.multiSelected || [];
     if (type === ANSWER_TYPES.SINGLE) {
-      return answerKey === selected.key;
+      return !selected ? false : selected.key === answerKey;
+    } else if (type === ANSWER_TYPES.MULTIPLE) {
+      const isIn = multi && multi.filter((ans) => ans.key === answerKey);
+      return !!isIn.length;
     }
-    const isIn = selected.filter((ans) => ans.key === answerKey);
-    return !!isIn.length;
   }
   createDisplayForMultipleAnswerQuestion() {
     const { question, answers } = this.props;
