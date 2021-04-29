@@ -83,19 +83,19 @@ export default class DisplayMaker extends Component {
   pushMultipleAnswersToState(key, answer) {
     var { multiSelected } = this.state;
     var isTheSameQuestion = this.sameQuestion();
-    var selected = multiSelected || [];
+    var selected = this.props.chosenAnswer || [];
     const obj = { ans: answer, key };
     const found = selected.filter((ans) => ans.key === key);
-    if (!isTheSameQuestion) {
-      this.setState({ multiSelected: [obj] });
-      this.handleOnItemSelected([obj]);
-      return;
-    }
+    // if (!isTheSameQuestion) {
+    //   this.setState({ multiSelected: [obj] });
+    //   this.handleOnItemSelected([obj]);
+    //   return;
+    // }
     if (found.length > 0) {
       // if answer has already been selected, remove from the list of selected
       const rem = selected.filter((ans) => ans.key !== key);
       this.setState({ multiSelected: rem });
-      this.handleOnItemSelected(selected);
+      this.handleOnItemSelected(rem);
     } else {
       // answer has not been selected, so go ahead and add
       let ready = [...selected, obj];
@@ -106,13 +106,13 @@ export default class DisplayMaker extends Component {
 
   answerIsSelected(answerKey) {
     const { type } = this.props;
-    const selected = this.state.selected;
-    const multi = this.state.multiSelected || [];
+    const selected = this.props.chosenAnswer;
+    // const multi = this.state.multiSelected || [];
     if (type === ANSWER_TYPES.SINGLE) {
       return !selected ? false : selected.key === answerKey;
     } else if (type === ANSWER_TYPES.MULTIPLE) {
-      const isIn = multi && multi.filter((ans) => ans.key === answerKey);
-      return !!isIn.length;
+      const isIn = selected && selected.filter((ans) => ans.key === answerKey);
+      return selected && !!isIn.length;
     }
   }
   createDisplayForMultipleAnswerQuestion() {
@@ -154,6 +154,7 @@ export default class DisplayMaker extends Component {
     }
   }
   render() {
+    console.log("I am the chosen answer", this.props.chosenAnswer);
     return <div>{this.renderContent()} </div>;
   }
 }
