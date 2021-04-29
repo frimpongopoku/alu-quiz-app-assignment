@@ -1,3 +1,25 @@
+.feedback {
+  font-size: 16px;
+  font-weight: bold;
+  color: green;
+}
+
+.finish-btn {
+  color: white;
+  font-weight: bold;
+  background: green;
+  border: 0;
+  box-shadow: 0;
+  padding: 12px 20px;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.finish-btn:hover {
+  background: black;
+  transition: 0.2s ease-out;
+}
+
 .complete-modal-body {
   z-index: 12;
   background: white;

@@ -88,7 +88,7 @@ export default class DisplayMaker extends Component {
     const found = selected.filter((ans) => ans.key === key);
     if (!isTheSameQuestion) {
       this.setState({ multiSelected: [obj] });
-      this.handleOnItemSelected(obj);
+      this.handleOnItemSelected([obj]);
       return;
     }
     if (found.length > 0) {

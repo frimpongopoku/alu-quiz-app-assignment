@@ -23,6 +23,7 @@ export default class Play extends Component {
       complete: false,
       points: 0, // player's points earned over the entire quiz
       playerSheet: [],
+      reviewMode: false,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveToQuestion = this.moveToQuestion.bind(this);
@@ -80,10 +81,17 @@ export default class Play extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  showDirectionalBtns() {
-    const { playerSheet, questions } = this.state;
-    if (playerSheet.length === questions.length)
-      return <button>Done, Submit My Answers</button>;
+  showFootItems() {
+    const { playerSheet, questions, reviewMode } = this.state;
+    if (reviewMode) {
+      <p className="feedback">
+        This is some nice feedback that you dont even know
+      </p>;
+    }
+    if (playerSheet.length === questions.length) {
+      return <button className="finish-btn">Finsh, See My Result</button>;
+    }
+
     return (
       <center>
         <button
@@ -122,12 +130,17 @@ export default class Play extends Component {
   }
 
   onAnswered(data) {
-    console.log("i am the data bro", data);
+    console.log("I am the data", data);
     if (!data) return;
     const { currentQuestion } = this.state;
+
     var points = this.state.points;
     const validator = new Validator(currentQuestion, data);
     const answerState = validator.answerIsCorrect();
+    // if (currentQuestion.type === ANSWER_TYPES.TEXT_ENTRY){
+    //   this.handleEntryValidation(data, answerState);
+    //   return;
+    // }
 
     const playerAnswerObj = {
       // create object that is going to contain the player's answer , the question, whether they were right or wrong, and how many points they earned from the validator
@@ -215,7 +228,7 @@ export default class Play extends Component {
               />
 
               <div className="bottom-directions" style={{ marginTop: 20 }}>
-                {this.showDirectionalBtns()}
+                {this.showFootItems()}
               </div>
             </div>
 

@@ -116,7 +116,7 @@ export const questions = [
               color: red;
             }
             `,
-          isAnswer: true,
+          isAnswer: false,
         },
         {
           letter: "C",
@@ -125,7 +125,7 @@ export const questions = [
             color: red;
           }
           `,
-          isAnswer: false,
+          isAnswer: true,
         },
         {
           letter: "D",

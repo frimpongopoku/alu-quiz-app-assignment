@@ -29,6 +29,7 @@ export default class Validator {
         return {
           ...result,
           points: status ? this.question.points : 0,
+          status,
         };
 
       case ANSWER_TYPES.SINGLE:
@@ -121,7 +122,6 @@ export default class Validator {
     // console.log("i am the answers", answers);
     // console.log("i am the deafults", this.answer)
     answers.forEach((answer) => {
-      console.log("I am in the loop", answer);
       if (answer.ans.isAnswer) correct.push(answer);
       else wrong.push(answer);
     });
