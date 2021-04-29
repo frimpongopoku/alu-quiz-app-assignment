@@ -16,6 +16,7 @@ export default class Play extends Component {
     super(props);
     this.state = {
       questions: questions,
+      currentQuestion:null,
       questionReported: false,
       reportError: false,
       complete: false,

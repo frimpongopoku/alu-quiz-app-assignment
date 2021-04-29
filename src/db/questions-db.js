@@ -7,87 +7,188 @@ export const ANSWER_TYPES = {
 
 export const questions = [
   {
-    key:"2f3fd958-b047-4e31-a888-a2481e46e0a8",
-    topic: { title : "POSITIONING", resources:"www.w3schools.com"},
+    key: "2f3fd958-b047-4e31-a888-a2481e46e0a8",
+    topic: {
+      title: "CSS SELECTORS",
+      resources: "https://www.w3schools.com/css/css_selectors.asp",
+    },
     type: ANSWER_TYPES.MULTIPLE,
     points: 10,
-    question: "What is the name of your favorite pet?",
+    question:
+      "Which of the following is an acceptable way of setting a background color of 'red' to div in css. Select all the apply",
+    feedback: "",
     possibleAnswers: {
       expected: 2,
-      settings: { special: false, style: {} },
+      settings: { hasStyles: false, style: {} },
       options: [
         {
           letter: "A",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: "div{ background:red; }",
           isAnswer: true,
         },
         {
           letter: "B",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: true,
+          text: "div{ 'background':red; }",
+          isAnswer: false,
         },
         {
           letter: "C",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: ".div{ background:'red'; }",
           isAnswer: false,
         },
         {
           letter: "D",
-          text:
-            "This is an option, this is another question, what do you think",
-          isAnswer: false,
+          text: "div      { background:    red;    }",
+          isAnswer: true,
         },
       ],
     },
   },
+  // -----------------------------------------------------------------------------------------------------
   {
     key: "bd63ce82-6704-4a8b-a87f-f8a0d4aaf37e",
-    topic:{ title : "TARGETTING", resources:"www.w3schools.com"},
+    topic: {
+      title: "CSS SYNTAX FORMAT",
+      resources: "https://www.w3schools.com/css/css_syntax.asp",
+    },
     type: ANSWER_TYPES.SINGLE,
     points: 5,
-    question: "What is the name of your favorite pet?",
+    question: "Which of the following is the correct format for the CSS?",
     possibleAnswers: {
-      settings: { special: false, style: {} },
+      feedback:
+        "CSS syntax is composed of selector and declaration wherein selector points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons.Each declaration includes a CSS property name and a value, separated by a colon and declaration blocks are surrounded by curly braces",
+      settings: { hasStyles: true, style: {} },
       options: [
         {
           letter: "A",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: "p { color: red, text-align: center; }",
           isAnswer: false,
         },
         {
           letter: "B",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: "p {color: red;text-align: center;}",
           isAnswer: true,
         },
         {
           letter: "C",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: "p { color -red; text-align -  center; }",
           isAnswer: false,
         },
         {
           letter: "D",
-          text:
-            "This is an option, this is another question, what do you think",
+          text: "p { color: red; text-align: center;",
           isAnswer: false,
         },
       ],
     },
   },
+  // -----------------------------------------------------------------------------------------------------
   {
-    key:"57991021-406a-4f34-964e-37c803d7a254",
-    topic: { title : "COLORS", resources:"www.w3schools.com"},
+    key: "ebd5cb51-8487-4bc2-9303-3ffa8410ac33",
+    topic: {
+      title: "CSS SELECTORS ID",
+      resources: "https://www.w3schools.com/css/css_selectors.asp",
+    },
+    type: ANSWER_TYPES.SINGLE,
+    points: 5,
+    question:
+      "Which of the following examples is the correct way to use CSS ID selector?",
+    possibleAnswers: {
+      feedback:
+        "Hash (#) character is being used to select an element with a specific id. An ID name cannot start with a number",
+      settings: { hasStyles: false, style: {} },
+      options: [
+        {
+          letter: "A",
+          text: `#1sen {
+              text-align: center;
+              color: red;
+            }
+            `,
+          isAnswer: false,
+        },
+        {
+          letter: "B",
+          text: `*sen1 {
+              text-align: center;
+              color: red;
+            }
+            `,
+          isAnswer: true,
+        },
+        {
+          letter: "C",
+          text: ` #sen1 {
+            text-align: center;
+            color: red;
+          }
+          `,
+          isAnswer: false,
+        },
+      ],
+    },
+  },
+  // -----------------------------------------------------------------------------------------------------
+  {
+    key: "838cf1c5-cd30-40a3-bcda-bbbf0bfd57f2",
+    topic: {
+      title: "CSS MARGINS",
+      resources: " https://www.w3schools.com/css/css_margin.asp",
+    },
+    type: ANSWER_TYPES.MULTIPLE,
+    points: 5,
+    question:
+      " Which of the following can be a possible value for margin properties? ",
+    possibleAnswers: {
+      expected: 2,
+      feedback: "B and D do not exist as values in CSS margin properties.",
+      settings: { hasStyles: false, style: {} },
+      options: [
+        {
+          letter: "A",
+          text: "auto",
+          isAnswer: true,
+        },
+        {
+          letter: "B",
+          text: "?",
+          isAnswer: true,
+        },
+        {
+          letter: "C",
+          text: "%",
+          isAnswer: true,
+        },
+        {
+          letter: "D",
+          text: "implemement",
+          isAnswer: false,
+        },
+      ],
+    },
+  },
+  // --------------------------------------------------------------------------------------------------------
+  {
+    key: "57991021-406a-4f34-964e-37c803d7a254",
+    topic: {
+      title: "CSS PROPERTIES",
+      resources:
+        "https://stackoverflow.com/questions/4718342/lots-of-dom-hidden-vs-display-none#:~:text=Because%20display%3A%20none%20actually%20removes,but%20they're%20still%20there.",
+    },
     type: ANSWER_TYPES.TEXT_ENTRY,
     points: 10,
-    question: "What is the name of your favorite pet?",
+    question: (
+      <span>
+        Using the editor provided below, assign a css property to a <b>div</b>{" "}
+        with a class name <b>.kula</b> in order to make disappear, and removed
+        from the DOM
+      </span>
+    ),
     possibleAnswers: {
-      settings: { special: true, style: {} },
-      correctAnswer: "#nameOfClass{background:white;}"
+      feedback:
+        "If you specify 'display: none', the browser does not take that element into consideration when painting.",
+      settings: { hasStyles: false, style: {}, hasHTML: true },
+      correctAnswer: ".kula{display:none;}",
     },
   },
 ];
