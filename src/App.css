@@ -1,3 +1,231 @@
+/* ------------------------ MOBILE PHONE AREA ------------------------- */
+@media only screen and (max-width: 767px) {
+  /* ----- ALL CSS Here will only affect the appliation when it reaches the defined with(767) or lower. Usually phones. -------- */
+  .phone-vanish {
+    display: none;
+  }
+
+  .phone-margin-top {
+    margin-top: 100px;
+    margin-bottom: 40px;
+  }
+  .top-bar-phone {
+    padding: 20px;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    background: white;
+    left: 0;
+    top: 0;
+  }
+  .phone-h1 {
+    font-size: 22px;
+  }
+
+  .question {
+    margin-top: 30px;
+    font-size: 26px;
+    /* min-height: 170px; */
+  }
+  .container-phone-mode-fix {
+    margin-top: 30% !important;
+  }
+
+  .user-profile-photo {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border: solid 2px orange;
+    /* padding:5px; */
+    object-fit: cover;
+    display: inline-block;
+  }
+
+  .name-area h3 {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .go-btn {
+    padding: 6px 12px;
+    background: #215221;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-size: 18px;
+    border-radius: 80px;
+    font-weight: bold;
+    text-shadow: -1px 1px 15px black;
+  }
+
+  .name-area {
+    padding: 20px;
+    height: 116px;
+    width: 82%;
+    position: fixed;
+    top: 44vh;
+    left: 9%;
+    border-radius: 12px;
+  }
+  .up-div h3 {
+    font-size: 21px;
+    color: antiquewhite;
+    text-shadow: 1px 2px 2px #ca6e59;
+  }
+  .up-div > h1 {
+    font-size: 35px !important;
+    margin-top: 30%;
+  }
+  .circle {
+    height: 160px;
+    width: 160px;
+    border-radius: 100%;
+    position: fixed;
+    top: 41vh;
+    left: 29%;
+    cursor: pointer;
+  }
+  .circle::after {
+    content: "";
+    color: white;
+    position: absolute;
+    top: 5vh;
+    left: 39%;
+    /* font-size: 33px; */
+    color: #deabab;
+    border: solid 36px transparent;
+    border-left-width: 10px;
+    border-left-width: 20px;
+    border-left-color: black;
+    border-left-width: 55px;
+  }
+  .down-div .content p {
+    margin-top: 33%;
+    font-size: 15px;
+    color: black;
+    /* font-weight: bold; */
+    text-shadow: 0px 0px 2px #90847b;
+  }
+  .down-div .content {
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  .name-box {
+    margin-top: 30px;
+    /* padding: 20px; */
+    width: 81%;
+    font-size: 17px;
+    border: 0px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: inline-bloc;
+  }
+}
+
+/* ------------------------------------ EXCLUSIVE PC MODE ------------------------ */
+
+@media only screen and (min-width: 768px) {
+  /* ------------ All css here will only affect the application when in pc mode */
+  .pc-vanish {
+    display: none;
+  }
+  .circle::after {
+    content: "";
+    color: white;
+    position: absolute;
+    top: 10vh;
+    left: 39%;
+    font-size: 40px;
+    color: #deabab;
+    border: solid 50px transparent;
+    border-left-width: 10px;
+    border-left-width: 20px;
+    border-left-color: black;
+    border-left-width: 87px;
+  }
+
+  .circle {
+    height: 300px;
+    width: 300px;
+    border-radius: 100%;
+    position: fixed;
+    top: 35vh;
+    left: 40%;
+    cursor: pointer;
+  }
+  .down-div .content {
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  .down-div .content p {
+    margin-top: 22%;
+    font-size: 24px;
+    color: black;
+    /* font-weight: bold; */
+    text-shadow: 0px 0px 2px #90847b;
+    /* font-style: italic; */
+  }
+
+  .name-area {
+    padding: 20px;
+    height: 146px;
+    width: 35%;
+    position: fixed;
+    top: 43vh;
+    left: 34%;
+    border-radius: 12px;
+  }
+  .name-area h3 {
+    font-size: 21px;
+    font-weight: bold;
+  }
+
+  .name-box {
+    margin-top: 30px;
+    /* padding: 20px; */
+    width: 88%;
+    font-size: 26px;
+    border: 0px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: inline-block;
+  }
+  .go-btn {
+    padding: 10px 16px;
+    background: #215221;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-size: 18px;
+    border-radius: 80px;
+    font-weight: bold;
+    text-shadow: -1px 1px 15px black;
+  }
+
+  .user-profile-photo {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: solid 2px orange;
+    /* padding:5px; */
+    object-fit: cover;
+  }
+
+  .question {
+    min-height: 200px;
+  }
+}
+
+/* ---------------------- GENERAL CSS DEFINITTIONS --------------------------- */
 .feedback {
   font-size: 16px;
   font-weight: bold;
@@ -149,9 +377,7 @@
   border-radius: 55px;
   margin-left: 5px;
 }
-.question {
-  min-height: 200px;
-}
+
 .answer-selected {
   border-color: green !important;
   color: green !important;
@@ -270,15 +496,6 @@
   color: orange;
 }
 
-.user-profile-photo {
-  height: 100px;
-  width: 100px;
-  border-radius: 100%;
-  border: solid 2px orange;
-  /* padding:5px; */
-  object-fit: cover;
-}
-
 .custom-card > p {
   font-size: 13px;
   font-weight: bold;
@@ -322,65 +539,12 @@
   height: 50vh;
 }
 
-.down-div .content {
-  padding-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
-.down-div .content p {
-  margin-top: 22%;
-  font-size: 24px;
-  color: black;
-  /* font-weight: bold; */
-  text-shadow: 0px 0px 2px #90847b;
-  /* font-style: italic; */
-}
-.name-area {
-  padding: 20px;
-  height: 146px;
-  width: 35%;
-  position: fixed;
-  top: 43vh;
-  left: 34%;
-  border-radius: 12px;
-}
-.name-area h3 {
-  font-size: 21px;
-  font-weight: bold;
-}
-.go-btn {
-  padding: 10px 16px;
-  background: #215221;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  font-size: 18px;
-  border-radius: 80px;
-  font-weight: bold;
-  text-shadow: -1px 1px 15px black;
-}
-
 .go-btn:hover {
   background: #d69215;
   transition: 0.2s ease-out;
 }
 .go-btn:focus {
   outline: 0;
-}
-
-.name-box {
-  margin-top: 30px;
-  /* padding: 20px; */
-  width: 88%;
-  font-size: 26px;
-  border: 0px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  text-transform: capitalize;
-  display: inline-block;
 }
 
 .name-box:focus {
@@ -390,15 +554,6 @@
   color: black;
 }
 
-.circle {
-  height: 300px;
-  width: 300px;
-  border-radius: 100%;
-  position: fixed;
-  top: 35vh;
-  left: 40%;
-  cursor: pointer;
-}
 .circle:hover {
   transform: scale(1.1);
   transition: 0.3s ease-out;
@@ -408,20 +563,6 @@
   transform: scale(2);
   transition: 0.2s ease-out;
   background: white;
-}
-.circle::after {
-  content: "";
-  color: white;
-  position: absolute;
-  top: 10vh;
-  left: 39%;
-  font-size: 40px;
-  color: #deabab;
-  border: solid 50px transparent;
-  border-left-width: 10px;
-  border-left-width: 20px;
-  border-left-color: black;
-  border-left-width: 87px;
 }
 
 .lift {

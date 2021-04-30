@@ -233,10 +233,27 @@ export default class Play extends Component {
             toggleModal={this.toggleModal}
           />
         )}
-        <div className="" style={{ margin: "0px 10%", paddingTop: "6%" }}>
-          {/* ---------------------------------------------  CSS TOPIC ---------------------------------------------- */}
+        <div
+          className="container-phone-mode-fix"
+          style={{ margin: "0px 10%", paddingTop: "6%" }}
+        >
+          {/* ---------------------------- PHONE TOP BAR ------------------------------ */}
+          {/*  this top navigation bar  will  only show in phone mode while other pc mode content dissappear */}
+          <div className="lift-slightly top-bar-phone pc-vanish">
+            <img
+              src="https://i.pravatar.cc/200"
+              className="user-profile-photo"
+            />
+            <small style={{ fontWeight: "bold", margin: 10, fontSize: 15 }}>
+              {this.state.userName || "..."}
+            </small>
+          </div>
+
+          {/* ---------------------------------------------   TOPIC ---------------------------------------------- */}
           <center>
-            <h1>{currentQuestion && currentQuestion.topic.title}</h1>
+            <h1 className="phone-h1">
+              {currentQuestion && currentQuestion.topic.title}
+            </h1>
             <br />
           </center>
           <div className="top-line"></div>
@@ -247,7 +264,7 @@ export default class Play extends Component {
               className="col-md-2 col-lg-2 col-sm-6 col-xs-12"
               style={{ padding: 10 }}
             >
-              <div className="custom-card lift-slightly">
+              <div className="custom-card lift-slightly phone-vanish">
                 <img
                   className="user-profile-photo lift-slightly"
                   alt="user's profile"
@@ -255,9 +272,14 @@ export default class Play extends Component {
                 />
                 <p>{this.state.userName || "..."}</p>
               </div>
-              <div className="all-questions-content" style={{ marginTop: 10 }}>
+              <div
+                className="all-questions-content phone-vanish"
+                style={{ marginTop: 10 }}
+              >
                 <center>
+                  {/* <div className="phone-vanish"> */}
                   {this.renderQuestions()}
+
                   {this.state.reviewMode && (
                     <button
                       style={{ width: "100%" }}
@@ -267,12 +289,13 @@ export default class Play extends Component {
                       SEE SCORE
                     </button>
                   )}
+                  {/* </div> */}
                 </center>
               </div>
             </div>
 
             {/* -----------------------------------------  MAIN QUESTION AREA ------------------------------------------ */}
-            <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12">
+            <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12" style={{padding:0}}>
               {this.renderQuestionTitle()}
               {/* {this.renderPossibleAnswers()} */}
 
@@ -293,7 +316,7 @@ export default class Play extends Component {
             </div>
 
             {/* --------------------------------------  CONTACT US SIDEBAR -------------------------------------------- */}
-            <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <div className="col-md-3 col-lg-3 col-sm-12 col-xs-12 phone-margin-top">
               <div className="custom-card contact-us-box lift-slightly">
                 <h3>Report A Question</h3>
                 {!questionReported && (
