@@ -12,6 +12,7 @@ export default class Validator {
       question: this.question,
       answer: this.answer,
     };
+
     var status;
     switch (this.type) {
       case ANSWER_TYPES.MULTIPLE:
@@ -45,7 +46,10 @@ export default class Validator {
   }
 
   /**
-   * @TODO remember to comment later...
+   * 
+   * @validateEntryAnswerQuestion that deflates all a user's input by replacing all spaces and then 
+   * matches it to the predefined answer of the question to see if its right and then returns a boolean 
+   * @returns bolean 
    */
   validateEntryAnswerQuestion() {
     if (!this.answer || this.answer.trim() === "") return false;
@@ -102,7 +106,7 @@ export default class Validator {
    * To obtain the points for all cases:
    * ---------------------------------------
    *  let a = number of items in the correct answer array, w= number of items that a player chose, but were wrong b = expected number of answers, p = the total number of @points [Provided by question object] that can be obtained by fully answering the question.
-   * Hence total points earned by user : PE = (a/b) * p
+   * Hence total points earned by user : PE = (a-w/b) * p
    * With this formular:
    * A fully answered question is  = maximum points attainable = p
    * A partially answered question is  = some value  > 0 but < p

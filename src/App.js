@@ -8,9 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import Play from "./pages/Play";
-import CompletionPage from "./pages/CompletionPage";
+// import CompletionPage from "./pages/CompletionPage";
 
 function App() {
+  // Entry point of the application and where all the routes are defined
   return (
     <div className="App">
       <Router>
@@ -18,7 +19,7 @@ function App() {
           <Route path="/home" component={LandingPage} />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route exact path="/play" component={Play} />
-          <Route exact path="/complete" component={CompletionPage} />
+          {/* <Route exact path="/complete" component={CompletionPage} /> */}
         </Switch>
       </Router>
     </div>

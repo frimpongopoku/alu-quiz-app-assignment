@@ -15,17 +15,18 @@ export default class Play extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: questions,
+      questions: questions,// the original array of questions that powers the entire app
       currentQuestion: questions[0],
-      currentQuestionIndex: 0,
+      currentQuestionIndex: 0, // the index of the current question a user is on
       questionReported: false,
       reportError: false,
       complete: false,
       points: 0, // player's points earned over the entire quiz
-      playerSheet: [],
-      reviewMode: false,
+      playerSheet: [], // an array of objects that contain a question a user has answered, and the answers they provided for the particular question as well as other fields
+      reviewMode: false, 
       playerName: "",
     };
+    // The following declarations help relate functions to the current class
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveToQuestion = this.moveToQuestion.bind(this);
     this.onAnswered = this.onAnswered.bind(this);
@@ -34,6 +35,7 @@ export default class Play extends Component {
   }
 
   componentDidMount() {
+    // collect the username that has been passed from the landing page here, and set it to the state 
     const params = this.props.location;
     this.setState({ userName: params.data && params.data.userName });
   }
@@ -41,8 +43,10 @@ export default class Play extends Component {
     this.setState({ complete: val });
   }
   getQuestionButtonClasses(key) {
-    const { currentQuestion } = this.state;
+    const { currentQuestion } = this.state; // get current question
     var classes = "";
+    //while looping over the list of questions, map the key of the current question to the key of the active question in the loop 
+    // if they are the same, it probably means a user is on that question, show different color by applying class
     if (currentQuestion.key === key) classes += " q-in-motion";
     return classes;
   }
@@ -66,6 +70,8 @@ export default class Play extends Component {
   renderQuestionTitle() {
     const question = this.state.currentQuestion;
     if (!question) return <span>...</span>;
+    //some question titles require special treatments. Some need to be displayed as html 
+    //check if it requires HTML and treat it differently
     if (question.settings.hasHTML)
       return (
         <h1
@@ -89,6 +95,7 @@ export default class Play extends Component {
   showFootItems() {
     const { playerSheet, questions, reviewMode, currentQuestion } = this.state;
 
+    // in review mode show feedback text 
     if (reviewMode) {
       const queInView = this.getPlayersChosenAnswersForQuestion();
       return (
@@ -114,6 +121,7 @@ export default class Play extends Component {
         </>
       );
     }
+    // when a user has answered all question, show a finish button instead of the directional navigation buttons
     if (playerSheet.length === questions.length) {
       return (
         <button
@@ -125,6 +133,8 @@ export default class Play extends Component {
       );
     }
 
+
+    // just render directional buttons if none of the above scenarios apply 
     return (
       <center>
         <button
@@ -147,16 +157,20 @@ export default class Play extends Component {
     this.setState({ currentQuestion: question, currentQuestionIndex: index });
   }
   moveToQuestion(index, direction) {
-    const { currentQuestionIndex } = this.state;
-    if (!direction)
+    // the index of the current question is always set and available. The index is relative to the original question array also set in the state
+    const { currentQuestionIndex } = this.state; 
+    if (!direction) //if direction is not available, it probably means a user wants to jump straight to a question, just use the index to collect the appropriate question 
+    //and set it to the state
       return this.setNewQuestion(index, this.state.questions[index]);
     var ind;
     if (direction === FORWARD) {
       ind = currentQuestionIndex + 1;
+      // only move forward if the index of the next question is not above the length of the question array
       if (ind < this.state.questions.length)
         this.setNewQuestion(ind, this.state.questions[ind]);
     } else if (direction === BACK) {
       ind = currentQuestionIndex - 1;
+      //only move backward if the supplied index of the next question is not less than the 0 ( the first item)
       if (currentQuestionIndex > 0)
         this.setNewQuestion(ind, this.state.questions[ind]);
     }

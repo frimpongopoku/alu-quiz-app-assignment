@@ -60,12 +60,15 @@ export default class DisplayMaker extends Component {
   }
 
   pushMultipleAnswersToState(key, answer) {
+     // gives an array of the answers a user chose for the multiple choice question if available,other wise, resort to an empty array
     var selected = this.props.chosenAnswer || [];
     const obj = { ans: answer, key };
-    const found = selected.filter((ans) => ans.key === key);
+    // check if the current answer a user has selected is already part of what they have selected previously, if it is, it probably means they want to unselect
+    const found = selected.filter((ans) => ans.key === key); 
     if (found.length > 0) {
       // if answer has already been selected, remove from the list of selected
       const rem = selected.filter((ans) => ans.key !== key);
+      // now submit the remaining list without the answer a
       this.handleOnItemSelected(rem);
     } else {
       // answer has not been selected, so go ahead and add
@@ -75,9 +78,13 @@ export default class DisplayMaker extends Component {
   }
 
   answerIsSelected(answerKey) {
+    // expects answerkey which is collected while looping over possible answers
     const { type } = this.props;
-    const selected = this.props.chosenAnswer;
+    // get the value of the answer a user chose
+    const selected = this.props.chosenAnswer; 
     // const multi = this.state.multiSelected || [];
+      // map the key of the current possible answer against the answer a user has chosen for the current question and see 
+      // if it matches, return true else : false
     if (type === ANSWER_TYPES.SINGLE) {
       return !selected ? false : selected.key === answerKey;
     } else if (type === ANSWER_TYPES.MULTIPLE) {
@@ -86,11 +93,23 @@ export default class DisplayMaker extends Component {
     }
   }
 
+  /**
+   * 
+   * The function determines what css propreties are fit for particular scenario of a possible answer 
+   * being displayed under a question
+   * @param {*} id 
+   * @param {*} answer 
+   * @returns 
+   */
   reviewAnswerAndGetProps(id, answer) {
-    const { reviewMode } = this.props;
+    const { reviewMode } = this.props; 
     const ansIsSelected = this.answerIsSelected(id);
+    // if review mode is active, and the user chose the current answer in the loop and it turns out 
+    // the answer is not right, apply a css class 
     if (reviewMode && ansIsSelected && !answer.isAnswer)
       return "chosen-answer-wrong";
+
+      //If its not in review mode, just apply appropriate classes if the current possible answer in the loop is selected
     if (!reviewMode && ansIsSelected) return "chosen-answer-active";
   }
 
@@ -115,10 +134,15 @@ export default class DisplayMaker extends Component {
 
   handleOnItemSelected = (data) => {
     const { onAnswered, reviewMode } = this.props;
-    if (!onAnswered || reviewMode) return;
+    if (!onAnswered || reviewMode) return; 
     onAnswered(data);
   };
 
+  /**
+   * 
+   * This is the main pivot function that uses the type of question to run the appropriate functions
+   * @returns 
+   */
   renderContent() {
     const { type } = this.props;
     switch (type) {
