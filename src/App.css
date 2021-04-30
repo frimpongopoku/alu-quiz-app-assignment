@@ -10,7 +10,7 @@
     margin-bottom: 40px;
   }
   .top-bar-phone {
-    padding: 20px;
+    padding: 8px 20px;
     position: fixed;
     z-index: 5;
     width: 100%;
@@ -28,7 +28,7 @@
     /* min-height: 170px; */
   }
   .container-phone-mode-fix {
-    margin-top: 30% !important;
+    margin-top: 20% !important;
   }
 
   .user-profile-photo {
@@ -124,6 +124,14 @@
     text-transform: capitalize;
     display: inline-bloc;
   }
+  .complete-modal-body {
+    z-index: 12;
+    background: white;
+    margin: 7% auto;
+    width: 95%;
+    max-height: 630px;
+    border-radius: 15px;
+  }
 }
 
 /* ------------------------------------ EXCLUSIVE PC MODE ------------------------ */
@@ -132,6 +140,14 @@
   /* ------------ All css here will only affect the application when in pc mode */
   .pc-vanish {
     display: none;
+  }
+  .complete-modal-body {
+    z-index: 12;
+    background: white;
+    margin: 7% auto;
+    width: 95%;
+    max-height: 630px;
+    border-radius: 15px;
   }
   .circle::after {
     content: "";
@@ -223,6 +239,14 @@
   .question {
     min-height: 200px;
   }
+  .complete-modal-body {
+    z-index: 12;
+    background: white;
+    margin: 7% auto;
+    width: 65%;
+    max-height: 630px;
+    border-radius: 15px;
+  }
 }
 
 /* ---------------------- GENERAL CSS DEFINITTIONS --------------------------- */
@@ -246,15 +270,6 @@
 .finish-btn:hover {
   background: black;
   transition: 0.2s ease-out;
-}
-
-.complete-modal-body {
-  z-index: 12;
-  background: white;
-  margin: 7% auto;
-  width: 65%;
-  max-height: 630px;
-  border-radius: 15px;
 }
 
 .review-work-btn {

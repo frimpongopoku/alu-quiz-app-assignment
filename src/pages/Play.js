@@ -243,6 +243,7 @@ export default class Play extends Component {
             <img
               src="https://i.pravatar.cc/200"
               className="user-profile-photo"
+              alt="user's profile"
             />
             <small style={{ fontWeight: "bold", margin: 10, fontSize: 15 }}>
               {this.state.userName || "..."}
@@ -295,7 +296,10 @@ export default class Play extends Component {
             </div>
 
             {/* -----------------------------------------  MAIN QUESTION AREA ------------------------------------------ */}
-            <div className="col-md-7 col-lg-7 col-sm-6 col-xs-12" style={{padding:0}}>
+            <div
+              className="col-md-7 col-lg-7 col-sm-6 col-xs-12"
+              style={{ padding: 0 }}
+            >
               {this.renderQuestionTitle()}
               {/* {this.renderPossibleAnswers()} */}
 
@@ -312,6 +316,26 @@ export default class Play extends Component {
 
               <div className="bottom-directions" style={{ marginTop: 20 }}>
                 {this.showFootItems()}
+
+                {/* -------------- The directional buttons below only shows in phone mode not pc -------- */}
+                {this.state.reviewMode && (
+                  <div className="pc-vanish">
+                    <center>
+                      <button
+                        className="round-btns lift-slightly"
+                        onClick={() => this.moveToQuestion(null, BACK)}
+                      >
+                        <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                      </button>
+                      <button
+                        className="round-btns lift-slightly"
+                        onClick={() => this.moveToQuestion(null, FORWARD)}
+                      >
+                        <FontAwesomeIcon icon={faLongArrowAltRight} />
+                      </button>
+                    </center>
+                  </div>
+                )}
               </div>
             </div>
 

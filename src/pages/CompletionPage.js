@@ -92,7 +92,7 @@ export default class CompletionPage extends Component {
                 </button>
               </center>
             </div>
-            <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <div className="col-md-6 col-lg-6 col-sm-6 col-xs-12 phone-vanish">
               <h3>
                 <b>QUIZ BREAK DOWN</b>
               </h3>
