@@ -300,14 +300,14 @@
 .up-div {
   padding: 50px;
   text-align: center;
-  background: white;
+  background: #ffbe7b;
   height: 50vh;
 }
 
 .up-div > h1 {
   font-size: 4rem;
-  color: #ff9800;
-  text-shadow: 1px 1px 2px #6b5a1d;
+  color: #1d1d1d;
+  text-shadow: 0px 1px 3px #6b5a1d73;
 }
 .up-div h3 {
   font-size: 1.8rem;
@@ -316,8 +316,26 @@
 }
 
 .down-div {
-  background: #ffc107;
+  display: flex;
+  /* background: #ffc107; */
+  background: white;
   height: 50vh;
+}
+
+.down-div .content {
+  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.down-div .content p {
+  margin-top: 22%;
+  font-size: 24px;
+  color: #a2753a;
+  /* font-weight: bold; */
+  text-shadow: 0px 0px 2px #90847b;
+  /* font-style: italic; */
 }
 .name-area {
   padding: 20px;
@@ -333,7 +351,7 @@
   font-weight: bold;
 }
 .go-btn {
-  padding: 10px 15px;
+  padding: 10px 16px;
   background: #215221;
   color: white;
   cursor: pointer;
@@ -358,8 +376,8 @@
   width: 88%;
   font-size: 26px;
   border: 0px;
-  background: #ffc107;
-  color: white;
+  background: white;
+  color: black;
   font-weight: bold;
   text-transform: capitalize;
   display: inline-block;
@@ -369,7 +387,7 @@
   outline: 0;
 }
 .name-box::placeholder {
-  color: white;
+  color: black;
 }
 
 .circle {
@@ -402,7 +420,7 @@
   border: solid 50px transparent;
   border-left-width: 10px;
   border-left-width: 20px;
-  border-left-color: #68af17;
+  border-left-color: black;
   border-left-width: 87px;
 }
 

@@ -24,6 +24,7 @@ export default class Play extends Component {
       points: 0, // player's points earned over the entire quiz
       playerSheet: [],
       reviewMode: false,
+      playerName: "",
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveToQuestion = this.moveToQuestion.bind(this);
@@ -32,6 +33,10 @@ export default class Play extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  componentDidMount() {
+    const params = this.props.location;
+    this.setState({ userName: params.data && params.data.userName });
+  }
   toggleModal(val) {
     this.setState({ complete: val });
   }
@@ -39,11 +44,6 @@ export default class Play extends Component {
     const { currentQuestion } = this.state;
     var classes = "";
     if (currentQuestion.key === key) classes += " q-in-motion";
-    // const foundInAnswered = playerSheet.filter(
-    //   (obj) => obj.question.key === key
-    // );
-    // if (foundInAnswered && foundInAnswered.length > 0)
-    //   classes += " q-compeleted";
     return classes;
   }
   renderQuestions() {
@@ -253,7 +253,7 @@ export default class Play extends Component {
                   alt="user's profile"
                   src="https://i.pravatar.cc/200"
                 />
-                <p>Frimpong O. Agyemang</p>
+                <p>{this.state.userName || "..."}</p>
               </div>
               <div className="all-questions-content" style={{ marginTop: 10 }}>
                 <center>
@@ -299,7 +299,7 @@ export default class Play extends Component {
                 {!questionReported && (
                   <div>
                     <small style={{ margin: "8px 0px" }}>
-                      <b>QUESTION 1</b>
+                      <b>QUESTION {this.state.currentQuestionIndex + 1} </b>
                     </small>
                     <input
                       type="email"

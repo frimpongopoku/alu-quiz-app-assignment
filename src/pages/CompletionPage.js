@@ -10,6 +10,7 @@ export default class CompletionPage extends Component {
         <div key={index.toString()} style={{ marginTop: 6 }}>
           <h3>
             <a
+            rel="noreferrer"
               target="_blank"
               href={obj.question.topic.resources}
               style={obj.wasRight ? { color: "green" } : { color: "maroon" }}
@@ -106,6 +107,7 @@ export default class CompletionPage extends Component {
                   textDecoration: "underline",
                   color: "maroon",
                 }}
+                rel = "noreferrer"
               >
                 Resources To Learn From
               </a>
