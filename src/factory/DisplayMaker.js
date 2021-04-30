@@ -13,7 +13,6 @@ export default class DisplayMaker extends Component {
   }
 
   handleOnChange = (e) => {
-    this.setState({ textEntry: e.target.value });
     this.handleOnItemSelected(e.target.value);
   };
 
@@ -23,40 +22,20 @@ export default class DisplayMaker extends Component {
         placeholder="#Write your css here..."
         className="text-entry-box"
         onChange={this.handleOnChange}
-      ></textarea>
+      >
+        {this.props.chosenAnswer}
+      </textarea>
     );
   }
 
-  // sameQuestion() {
-  //   const { selected, multiSelected } = this.state;
-  //   if (this.props.type === ANSWER_TYPES.SINGLE) {
-  //     if (!selected) return true;
-  //     else {
-  //       const key = selected.key.split("->")[0];
-  //       return this.props.question.key === key;
-  //     }
-  //   } else if (this.props.type === ANSWER_TYPES.MULTIPLE) {
-  //     if (!multiSelected || multiSelected.length === 0) return true;
-  //     else {
-  //       const one = multiSelected[0];
-  //       return one.key.split("->")[0] === this.props.question.key;
-  //     }
-  //   }
-  //   return false;
-  // }
 
   pushAnswerToState(key, answer) {
     const { selected } = this.state;
-    // const isTheSameQuestion = this.sameQuestion();
     if (selected && selected.key === key) {
       // answer has already been clicked before, user wants to remove it
-      this.setState({
-        selected: null,
-      });
       this.handleOnItemSelected(null);
     } else {
       // user is now choosing an answer
-      this.setState({ selected: { ans: answer, key } });
       this.handleOnItemSelected({ ans: answer, key });
     }
   }
@@ -87,12 +66,10 @@ export default class DisplayMaker extends Component {
     if (found.length > 0) {
       // if answer has already been selected, remove from the list of selected
       const rem = selected.filter((ans) => ans.key !== key);
-      this.setState({ multiSelected: rem });
       this.handleOnItemSelected(rem);
     } else {
       // answer has not been selected, so go ahead and add
       let ready = [...selected, obj];
-      this.setState({ multiSelected: ready });
       this.handleOnItemSelected(ready);
     }
   }
@@ -122,7 +99,6 @@ export default class DisplayMaker extends Component {
     return (answers || []).map((answer, index) => {
       const letter = NumToAlpha(index);
       const id = question.key + "->" + letter;
-      // const _class = reviewMode && this.answerIsSelected ? answer.isAnswer
       return (
         <p
           className={`one-answer ${this.reviewAnswerAndGetProps(id, answer)} ${
